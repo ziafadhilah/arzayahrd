@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 
 import 'package:flutter/material.dart';
 
-import 'package:magentahrdios/services/api_clien.dart';
+import 'package:arzayahrd/services/api_clien.dart';
 
 import 'package:photo_view/photo_view.dart';
 

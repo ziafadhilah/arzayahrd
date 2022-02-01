@@ -9,23 +9,23 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 
 import 'package:intl/intl.dart';
-import 'package:magentahrdios/pages/admin/absence/tabmenu_absence.dart';
-import 'package:magentahrdios/pages/admin/employees/list.dart';
-import 'package:magentahrdios/pages/admin/leave/tabmenu_offwork.dart';
-import 'package:magentahrdios/pages/admin/permission/tabmenu.dart';
-import 'package:magentahrdios/pages/admin/project/tabmenu_project.dart';
-import 'package:magentahrdios/pages/admin/sick/tabmenu.dart';
-import 'package:magentahrdios/pages/employee/account/profile.dart';
-import 'package:magentahrdios/pages/employee/attendances/attendances.dart';
-import 'package:magentahrdios/pages/employee/attendances/checkin.dart';
-import 'package:magentahrdios/pages/employee/attendances/checkout.dart';
-import 'package:magentahrdios/pages/employee/leave/LeaveList.dart';
-import 'package:magentahrdios/pages/employee/permission/list.dart';
-import 'package:magentahrdios/pages/employee/sick/list.dart';
-import 'package:magentahrdios/services/api_clien.dart';
-import 'package:magentahrdios/utalities/color.dart';
-import 'package:magentahrdios/utalities/constants.dart';
-import 'package:magentahrdios/utalities/fonts.dart';
+import 'package:arzayahrd/pages/admin/absence/tabmenu_absence.dart';
+import 'package:arzayahrd/pages/admin/employees/list.dart';
+import 'package:arzayahrd/pages/admin/leave/tabmenu_offwork.dart';
+import 'package:arzayahrd/pages/admin/permission/tabmenu.dart';
+import 'package:arzayahrd/pages/admin/project/tabmenu_project.dart';
+import 'package:arzayahrd/pages/admin/sick/tabmenu.dart';
+import 'package:arzayahrd/pages/employee/account/profile.dart';
+import 'package:arzayahrd/pages/employee/attendances/attendances.dart';
+import 'package:arzayahrd/pages/employee/attendances/checkin.dart';
+import 'package:arzayahrd/pages/employee/attendances/checkout.dart';
+import 'package:arzayahrd/pages/employee/leave/LeaveList.dart';
+import 'package:arzayahrd/pages/employee/permission/list.dart';
+import 'package:arzayahrd/pages/employee/sick/list.dart';
+import 'package:arzayahrd/services/api_clien.dart';
+import 'package:arzayahrd/utalities/color.dart';
+import 'package:arzayahrd/utalities/constants.dart';
+import 'package:arzayahrd/utalities/fonts.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'package:http/http.dart' as http;
@@ -48,7 +48,7 @@ class _HomeAdminState extends State<HomeAdmin> {
   bool _isLoading_sick = true;
   bool _isLoading_permission = true;
   bool _isLoading_leave = true;
-  var lengthPermission=0,lengthSick=0,lengthleave=0;
+  var lengthPermission = 0, lengthSick = 0, lengthleave = 0;
 
   // final FirebaseMessaging _firebaseMessaging = FirebaseMessaging();
   // FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin;
@@ -123,7 +123,7 @@ class _HomeAdminState extends State<HomeAdmin> {
                                             "Karyawan",
                                             style: TextStyle(
                                                 color: Colors.white,
-                                                fontSize: 16),
+                                                fontSize: 15,fontFamily: 'Roboto-medium',letterSpacing: 0.5),
                                           ),
                                         ],
                                       ),
@@ -331,7 +331,6 @@ class _HomeAdminState extends State<HomeAdmin> {
   }
 
   Widget _buildMenuPermission() {
-
     return Column(children: <Widget>[
       new Container(
         width: 70,
@@ -1139,11 +1138,14 @@ class _HomeAdminState extends State<HomeAdmin> {
           children: <Widget>[
             Container(
               child: _employee!['data'][index]['photo'] == null
-                  ? CircleAvatar(
-                      radius: 30,
-                      backgroundImage: NetworkImage(photo_profile),
-                    )
+                  ? Container(
+                      child: Image.asset(
+                      "assets/profile-default.png",
+                      width: 60,
+                      height: 60,
+                    ))
                   : CircleAvatar(
+                      backgroundColor: Colors.black.withOpacity(0.2),
                       radius: 30,
                       backgroundImage: NetworkImage(
                           "${image_ur}/${_employee!['data'][index]['photo']}"),
@@ -1154,7 +1156,7 @@ class _HomeAdminState extends State<HomeAdmin> {
             ),
             Text(
               "${_employee!['data'][index]['first_name']}",
-              style: TextStyle(color: Colors.white),
+              style: TextStyle(color: Colors.white,fontFamily: "Roboto-regular",fontSize: 10,letterSpacing: 0.5),
             ),
           ],
         ),
@@ -1332,7 +1334,7 @@ class _HomeAdminState extends State<HomeAdmin> {
 
       setState(() {
         lengthPermission = list
-            .where((i) => i['employee_id'].toString() != user_id.toString() )
+            .where((i) => i['employee_id'].toString() != user_id.toString())
             .toList()
             .length;
         _isLoading_permission = false;
@@ -1351,12 +1353,11 @@ class _HomeAdminState extends State<HomeAdmin> {
           .get(Uri.parse("$base_url/api/sick-submissions?status=pending"));
       _sick = jsonDecode(response.body);
       print("data sakit ${_sick}");
-      List list=_sick!['data'];
-
+      List list = _sick!['data'];
 
       setState(() {
         lengthSick = list
-            .where((i) => i['employee_id'].toString() != user_id.toString() )
+            .where((i) => i['employee_id'].toString() != user_id.toString())
             .toList()
             .length;
         print("jumla sakit ${lengthSick}");
@@ -1374,11 +1375,11 @@ class _HomeAdminState extends State<HomeAdmin> {
       http.Response response = await http
           .get(Uri.parse("$base_url/api/leave-submissions?status=pending"));
       _leave = jsonDecode(response.body);
-      List list= _leave!['data'];
+      List list = _leave!['data'];
 
       setState(() {
         lengthleave = list
-            .where((i) => i['employee_id'].toString() != user_id.toString() )
+            .where((i) => i['employee_id'].toString() != user_id.toString())
             .toList()
             .length;
         _isLoading_leave = false;

@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:magentahrdios/models/companies.dart';
-import 'package:magentahrdios/pages/admin/home/navbar.dart';
-import 'package:magentahrdios/pages/employee/nav.dart';
-import 'package:magentahrdios/shared_preferenced/sessionmanage.dart';
-import 'package:magentahrdios/utalities/alert_dialog.dart';
+import 'package:arzayahrd/models/companies.dart';
+import 'package:arzayahrd/pages/admin/home/navbar.dart';
+import 'package:arzayahrd/pages/employee/nav.dart';
+import 'package:arzayahrd/shared_preferenced/sessionmanage.dart';
+import 'package:arzayahrd/utalities/alert_dialog.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:toast/toast.dart';
 

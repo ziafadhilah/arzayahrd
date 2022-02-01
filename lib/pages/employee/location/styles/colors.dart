@@ -1,7 +1,7 @@
 
 
 import 'package:flutter/material.dart' show Color;
-import 'package:magentahrdios/pages/employee/location/extension/color_extension.dart';
+import 'package:arzayahrd/pages/employee/location/extension/color_extension.dart';
 
 class AppColors {
   AppColors._();

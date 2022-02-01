@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:magentahrdios/services/api_clien.dart';
-import 'package:magentahrdios/utalities/color.dart';
+import 'package:arzayahrd/services/api_clien.dart';
+import 'package:arzayahrd/utalities/color.dart';
 
 class DetailProfile extends StatefulWidget {
   var id;
@@ -115,11 +115,19 @@ class _DetailProfileState extends State<DetailProfile> {
       child: Row(
         children: <Widget>[
           Container(
-              child: CircleAvatar(
-            backgroundImage: NetworkImage("${image_ur}/$photo"),
-            backgroundColor: Colors.transparent,
-            radius: 40,
-          )),
+            child: photo != null
+                ? CircleAvatar(
+                    backgroundImage: NetworkImage("${image_ur}/$photo"),
+                    backgroundColor: Colors.transparent,
+                    radius: 30,
+                  )
+                : Container(
+                    child: Image.asset(
+                    "assets/profile-default.png",
+                    width: 60,
+                    height: 60,
+                  )),
+          ),
           Container(
             margin: EdgeInsets.only(left: 10, right: 10),
             child: Column(
@@ -130,9 +138,10 @@ class _DetailProfileState extends State<DetailProfile> {
                   child: Text(
                     "${first_name}",
                     style: TextStyle(
-                        fontFamily: "SFReguler",
-                        fontSize: 18,
-                        color: Colors.black87,
+                        fontFamily: "Roboto-bold",
+                        fontSize: 15,
+                        color: Colors.black,
+                        letterSpacing: 0.5,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -143,9 +152,10 @@ class _DetailProfileState extends State<DetailProfile> {
                   child: Text(
                     "${employee_id}",
                     style: TextStyle(
-                      fontSize: 15,
-                      fontFamily: "SFReguler",
-                      color: Colors.black38,
+                      fontSize: 12,
+                      fontFamily: "Roboto-regular",
+                      letterSpacing: 0.5,
+                      color: Colors.black.withOpacity(0.2),
                     ),
                   ),
                 ),

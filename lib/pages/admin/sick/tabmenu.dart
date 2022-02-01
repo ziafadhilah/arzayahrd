@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:magentahrdios/pages/admin/sick/list.dart';
-import 'package:magentahrdios/utalities/color.dart';
+import 'package:arzayahrd/pages/admin/sick/list.dart';
+import 'package:arzayahrd/utalities/color.dart';
 
 class TabmenuSickPageAdmin extends StatelessWidget {
   List<Widget> containers = [

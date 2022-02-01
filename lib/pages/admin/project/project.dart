@@ -1,11 +1,11 @@
 // import 'dart:convert';
 // import 'package:flutter/material.dart';
 // import 'package:get/get.dart';
-// import 'package:magentahrdios/pages/admin/project/shimmer_project.dart';
-// import 'package:magentahrdios/services/api_clien.dart';
-// import 'package:magentahrdios/utalities/color.dart';
-// import 'package:magentahrdios/utalities/constants.dart';
-// import 'package:magentahrdios/utalities/fonts.dart';
+// import 'package:arzayahrd/pages/admin/project/shimmer_project.dart';
+// import 'package:arzayahrd/services/api_clien.dart';
+// import 'package:arzayahrd/utalities/color.dart';
+// import 'package:arzayahrd/utalities/constants.dart';
+// import 'package:arzayahrd/utalities/fonts.dart';
 //
 // import 'package:percent_indicator/circular_percent_indicator.dart';
 // import 'package:http/http.dart' as http;

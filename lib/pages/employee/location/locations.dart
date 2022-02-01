@@ -4,11 +4,11 @@ import 'dart:html';
 import 'package:flutter/material.dart';
 
 import 'package:js/js.dart';
-import 'package:magentahrdios/pages/employee/location/utalities/alert.dart';
-import 'package:magentahrdios/pages/employee/location/utalities/api.dart';
-import 'package:magentahrdios/pages/employee/location/utalities/constants.dart';
-import 'package:magentahrdios/pages/employee/location/utalities/helper.dart';
-import 'package:magentahrdios/pages/employee/location/widget/customer_scaffold.dart';
+import 'package:arzayahrd/pages/employee/location/utalities/alert.dart';
+import 'package:arzayahrd/pages/employee/location/utalities/api.dart';
+import 'package:arzayahrd/pages/employee/location/utalities/constants.dart';
+import 'package:arzayahrd/pages/employee/location/utalities/helper.dart';
+import 'package:arzayahrd/pages/employee/location/widget/customer_scaffold.dart';
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({ Key? key}) : super(key: key);

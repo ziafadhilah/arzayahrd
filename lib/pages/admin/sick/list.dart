@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:format_indonesia/format_indonesia.dart';
 import 'package:get/get.dart';
-import 'package:magentahrdios/pages/admin/project/shimmer_project.dart';
-import 'package:magentahrdios/pages/employee/leave/LeaveEdit.dart';
-import 'package:magentahrdios/pages/employee/sick/tabmenu.dart';
-import 'package:magentahrdios/services/api_clien.dart';
-import 'package:magentahrdios/utalities/color.dart';
-import 'package:magentahrdios/utalities/constants.dart';
+import 'package:arzayahrd/pages/admin/project/shimmer_project.dart';
+import 'package:arzayahrd/pages/employee/leave/LeaveEdit.dart';
+import 'package:arzayahrd/pages/employee/sick/tabmenu.dart';
+import 'package:arzayahrd/services/api_clien.dart';
+import 'package:arzayahrd/utalities/color.dart';
+import 'package:arzayahrd/utalities/constants.dart';
 
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';

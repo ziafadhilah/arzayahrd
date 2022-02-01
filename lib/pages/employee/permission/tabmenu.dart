@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:magentahrdios/pages/employee/permission/liststatus.dart';
-import 'package:magentahrdios/utalities/color.dart';
+import 'package:arzayahrd/pages/employee/permission/liststatus.dart';
+import 'package:arzayahrd/utalities/color.dart';
 
 class TabMenuPermissionPageEmployee extends StatelessWidget {
   final navigatorKey = GlobalKey<NavigatorState>();

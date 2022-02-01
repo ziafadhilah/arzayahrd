@@ -1,7 +1,7 @@
 //
 // import 'package:flutter/material.dart';
 //
-// import 'package:magentahrdios/pages/admin/project/project.dart';
+// import 'package:arzayahrd/pages/admin/project/project.dart';
 //
 //
 //

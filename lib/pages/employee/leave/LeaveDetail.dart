@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 
 
 import 'package:http/http.dart' as http;
-import 'package:magentahrdios/pages/employee/attendances/shimmer.dart';
-import 'package:magentahrdios/services/api_clien.dart';
-import 'package:magentahrdios/utalities/constants.dart';
-import 'package:magentahrdios/utalities/fonts.dart';
+import 'package:arzayahrd/pages/employee/attendances/shimmer.dart';
+import 'package:arzayahrd/services/api_clien.dart';
+import 'package:arzayahrd/utalities/constants.dart';
+import 'package:arzayahrd/utalities/fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class leave_status extends StatefulWidget {

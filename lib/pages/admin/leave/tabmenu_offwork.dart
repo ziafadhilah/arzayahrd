@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:magentahrdios/pages/admin/leave/offwork_status.dart';
-import 'package:magentahrdios/utalities/color.dart';
+import 'package:arzayahrd/pages/admin/leave/offwork_status.dart';
+import 'package:arzayahrd/utalities/color.dart';
 
 class TabsMenuOffworkAdmin extends StatelessWidget {
   List<Widget> containers = [

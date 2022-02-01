@@ -4,8 +4,8 @@
 // import 'package:flutter/material.dart';
 //
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-// import 'package:magentahrdios/pages/employee/location/assets/assets.dart';
-// import 'package:magentahrdios/pages/employee/location/services/link_service.dart';
+// import 'package:arzayahrd/pages/employee/location/assets/assets.dart';
+// import 'package:arzayahrd/pages/employee/location/services/link_service.dart';
 //
 // class CustomDrawer extends StatelessWidget {
 //   const CustomDrawer({

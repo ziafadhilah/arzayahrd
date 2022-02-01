@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:magentahrdios/pages/employee/account/profile.dart';
-import 'package:magentahrdios/services/api_clien.dart';
-import 'package:magentahrdios/utalities/color.dart';
+import 'package:arzayahrd/pages/employee/account/profile.dart';
+import 'package:arzayahrd/services/api_clien.dart';
+import 'package:arzayahrd/utalities/color.dart';
 
 class ListEmployee extends StatefulWidget {
   @override
@@ -30,13 +30,22 @@ class _ListEmployeeState extends State<ListEmployee> {
         margin: EdgeInsets.only(left: 5, top: 15),
         child: Row(
           children: <Widget>[
-            Container(
-              child: CircleAvatar(
-                radius: 30,
-                backgroundImage:
-                    NetworkImage("${image_ur}/${_employees[index]['photo']}"),
-              ),
-            ),
+            _employees[index]['photo'] != null
+                ? Container(
+                    child: CircleAvatar(
+                      backgroundColor: Colors.black.withOpacity(0.2),
+                      radius: 30,
+                      backgroundImage: NetworkImage(
+                          "${image_ur}/${_employees[index]['photo']}"),
+                    ),
+                  )
+                : Container(
+                    child: Image.asset(
+                    "assets/profile-default.png",
+                    width: 70,
+                    height: 70,
+                  )),
+
             Container(
               margin: EdgeInsets.only(left: 20),
               child: Column(
@@ -58,7 +67,8 @@ class _ListEmployeeState extends State<ListEmployee> {
                     style: TextStyle(
                         color: Colors.black.withOpacity(0.5),
                         fontSize: 12,
-                        fontFamily: "Roboto-regular",letterSpacing: 0.5),
+                        fontFamily: "Roboto-regular",
+                        letterSpacing: 0.5),
                   ),
                   Container(
                     width: MediaQuery.of(context).size.width - 100,

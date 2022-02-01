@@ -9,10 +9,10 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 
-import 'package:magentahrdios/services/api_clien.dart';
-import 'package:magentahrdios/utalities/color.dart';
+import 'package:arzayahrd/services/api_clien.dart';
+import 'package:arzayahrd/utalities/color.dart';
 
-import 'package:magentahrdios/utalities/fonts.dart';
+import 'package:arzayahrd/utalities/fonts.dart';
 import 'package:mapbox_gl/mapbox_gl.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,17 +23,17 @@ class Maps extends StatefulWidget {
 
   Maps(
       {this.address,
-        this.longitude,
-        this.latitude,
-        this.gender,
-        this.last_name,
-        this.firts_name,
-        this.profile_background,
-        this.distance,
-        this.longMainoffice,
-        this.latmainoffice,
-        this.image,
-        this.departement_name});
+      this.longitude,
+      this.latitude,
+      this.gender,
+      this.last_name,
+      this.firts_name,
+      this.profile_background,
+      this.distance,
+      this.longMainoffice,
+      this.latmainoffice,
+      this.image,
+      this.departement_name});
 
   var address,
       latitude,
@@ -159,45 +159,45 @@ class _MapsState extends State<Maps> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
-          children: <Widget>[
-            _map(),
-            AnimatedPositioned(
-              bottom: _pinPillPosition,
-              right: 0,
-              left: 0,
-              duration: Duration(milliseconds: 200),
-              child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  margin: EdgeInsets.all(20),
-                  height: 70,
-                  decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(50)),
-                      boxShadow: <BoxShadow>[
-                        BoxShadow(
-                          blurRadius: 20,
-                          offset: Offset.zero,
-                          color: Colors.grey.withOpacity(0.5),
-                        )
-                      ]),
-                ),
-              ),
+      children: <Widget>[
+        _map(),
+        AnimatedPositioned(
+          bottom: _pinPillPosition,
+          right: 0,
+          left: 0,
+          duration: Duration(milliseconds: 200),
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              margin: EdgeInsets.all(20),
+              height: 70,
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(50)),
+                  boxShadow: <BoxShadow>[
+                    BoxShadow(
+                      blurRadius: 20,
+                      offset: Offset.zero,
+                      color: Colors.grey.withOpacity(0.5),
+                    )
+                  ]),
             ),
-            new Positioned(
-                top: MediaQuery.of(context).size.height * 0.6,
-                child: new Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height / 2,
-                    decoration: new BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: new BorderRadius.only(
-                          topLeft: const Radius.circular(5.0),
-                          topRight: const Radius.circular(5.0),
-                        )),
-                    child: _info()))
-          ],
-        ));
+          ),
+        ),
+        new Positioned(
+            top: MediaQuery.of(context).size.height * 0.6,
+            child: new Container(
+                width: MediaQuery.of(context).size.width,
+                height: MediaQuery.of(context).size.height / 2,
+                decoration: new BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: new BorderRadius.only(
+                      topLeft: const Radius.circular(5.0),
+                      topRight: const Radius.circular(5.0),
+                    )),
+                child: _info()))
+      ],
+    ));
   }
 
   // Widget _info() {
@@ -360,7 +360,6 @@ class _MapsState extends State<Maps> {
   //   );
   // }
 
-
   Widget _info() {
     return Container(
       child: Container(
@@ -374,17 +373,16 @@ class _MapsState extends State<Maps> {
                       margin: EdgeInsets.only(top: 20, left: 20, right: 20),
                       child: widget.profile_background != null
                           ? CircleAvatar(
-                        radius: 30.0,
-                        backgroundImage: NetworkImage(
-                            "${image_ur}/${widget.profile_background}"),
-                        backgroundColor: Colors.transparent,
-                      )
+                              radius: 30.0,
+                              backgroundImage: NetworkImage(
+                                  "${image_ur}/${widget.profile_background}"),
+                              backgroundColor: Colors.transparent,
+                            )
                           : Image.asset(
-                        "assetss/profile-default.png",
-                        width: 70,
-                        height: 70,
-                      )
-                  ),
+                              "assetss/profile-default.png",
+                              width: 70,
+                              height: 70,
+                            )),
                   Container(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -496,7 +494,7 @@ class _MapsState extends State<Maps> {
                 children: <Widget>[
                   Container(
                     margin:
-                    EdgeInsets.only(left: 10, right: 20, top: 5, bottom: 5),
+                        EdgeInsets.only(left: 10, right: 20, top: 5, bottom: 5),
                     child: Icon(
                       Icons.info,
                       color: Colors.black,
@@ -505,19 +503,19 @@ class _MapsState extends State<Maps> {
                   Container(
                       child: widget.distance > 20
                           ? Text(
-                        "Anda berada di luar area kantor",
-                        style: TextStyle(
-                            color: blackColor,
-                            fontFamily: "Roboto-regular",
-                            letterSpacing: 0.5),
-                      )
+                              "Anda berada di luar area kantor",
+                              style: TextStyle(
+                                  color: blackColor,
+                                  fontFamily: "Roboto-regular",
+                                  letterSpacing: 0.5),
+                            )
                           : Text(
-                        "Anda berada di dalam area kantor",
-                        style: TextStyle(
-                            color: blackColor,
-                            fontFamily: "Roboto-regular",
-                            letterSpacing: 0.5),
-                      ))
+                              "Anda berada di dalam area kantor",
+                              style: TextStyle(
+                                  color: blackColor,
+                                  fontFamily: "Roboto-regular",
+                                  letterSpacing: 0.5),
+                            ))
                 ],
               ),
             )
@@ -528,6 +526,7 @@ class _MapsState extends State<Maps> {
       ),
     );
   }
+
   void _setCircles() {
     // _circles.add(
     //   Circle(
@@ -547,12 +546,9 @@ class _MapsState extends State<Maps> {
     });
   }
 
-
-
   void _onMapCreated(MapboxMapController controller) async {
     mapController = controller;
     _onStyleLoaded();
-
   }
 
   Future<void> addImageFromAsset(String name, String assetName) async {
@@ -573,7 +569,7 @@ class _MapsState extends State<Maps> {
 
     return MapboxMap(
       accessToken:
-      "pk.eyJ1Ijoia2l0dG9rYXR0byIsImEiOiJja2t5eTducm4wYmhwMnFwNXI4ejA4cGhuIn0.xoSKS41bJtuetZ8v5p_aiQ",
+          "pk.eyJ1Ijoia2l0dG9rYXR0byIsImEiOiJja2t5eTducm4wYmhwMnFwNXI4ejA4cGhuIn0.xoSKS41bJtuetZ8v5p_aiQ",
       onMapCreated: _onMapCreated,
       onStyleLoadedCallback: () {
         addCircle(mapController!);

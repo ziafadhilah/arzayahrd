@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:magentahrdios/pages/employee/home/home.dart';
-import 'package:magentahrdios/utalities/color.dart';
-import 'package:magentahrdios/vaidasi/validator.dart';
+import 'package:arzayahrd/pages/employee/home/home.dart';
+import 'package:arzayahrd/utalities/color.dart';
+import 'package:arzayahrd/vaidasi/validator.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 

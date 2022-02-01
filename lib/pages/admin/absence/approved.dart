@@ -4,11 +4,11 @@ import 'package:get/get.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
-import 'package:magentahrdios/pages/admin/home/navbar.dart';
-import 'package:magentahrdios/pages/employee/attendances/shimmer.dart';
-import 'package:magentahrdios/services/api_clien.dart';
-import 'package:magentahrdios/utalities/color.dart';
-import 'package:magentahrdios/utalities/constants.dart';
+import 'package:arzayahrd/pages/admin/home/navbar.dart';
+import 'package:arzayahrd/pages/employee/attendances/shimmer.dart';
+import 'package:arzayahrd/services/api_clien.dart';
+import 'package:arzayahrd/utalities/color.dart';
+import 'package:arzayahrd/utalities/constants.dart';
 
 class ApprovedAbsenceAdminPage extends StatefulWidget {
   ApprovedAbsenceAdminPage ({this.type});

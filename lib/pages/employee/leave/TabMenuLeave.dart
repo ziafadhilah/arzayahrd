@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:magentahrdios/pages/employee/leave/LeaveStatus.dart';
-import 'package:magentahrdios/utalities/color.dart';
+import 'package:arzayahrd/pages/employee/leave/LeaveStatus.dart';
+import 'package:arzayahrd/utalities/color.dart';
 
 
 class TabsMenuLeavestatus extends StatelessWidget {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:magentahrdios/pages/admin/task/ListTask.dart';
+import 'package:arzayahrd/pages/admin/task/ListTask.dart';
 
 class Tabstask extends StatelessWidget {
 

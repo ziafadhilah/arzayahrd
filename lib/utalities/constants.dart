@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import 'package:intl/intl.dart';
-import 'package:magentahrdios/utalities/color.dart';
+import 'package:arzayahrd/utalities/color.dart';
 
 const version = "1.0";
 

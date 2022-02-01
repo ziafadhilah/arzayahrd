@@ -8,7 +8,7 @@
 // import 'package:hrdmagenta/utalities/color.dart';
 // import 'package:hrdmagenta/utalities/constants.dart';
 // import 'package:http/http.dart' as http;
-// import 'package:magentahrdios/utalities/color.dart';
+// import 'package:arzayahrd/utalities/color.dart';
 //
 //
 //

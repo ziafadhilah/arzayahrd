@@ -4,7 +4,7 @@ import 'dart:convert';
 
 
 import 'package:http/http.dart' as http;
-import 'package:magentahrdios/models/location_model.dart';
+import 'package:arzayahrd/models/location_model.dart';
 
 const _url = 'https://geolocation-db.com/json/';
 

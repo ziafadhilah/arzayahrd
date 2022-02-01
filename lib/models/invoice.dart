@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
-import 'package:magentahrdios/models/pdf.dart';
-import 'package:magentahrdios/models/supplier.dart';
+import 'package:arzayahrd/models/pdf.dart';
+import 'package:arzayahrd/models/supplier.dart';
 
 import 'employee.dart';
 

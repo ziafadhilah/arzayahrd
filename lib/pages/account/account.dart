@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import 'package:magentahrdios/services/api_clien.dart';
-import 'package:magentahrdios/shared_preferenced/sessionmanage.dart';
-import 'package:magentahrdios/utalities/color.dart';
-import 'package:magentahrdios/utalities/constants.dart';
+import 'package:arzayahrd/services/api_clien.dart';
+import 'package:arzayahrd/shared_preferenced/sessionmanage.dart';
+import 'package:arzayahrd/utalities/color.dart';
+import 'package:arzayahrd/utalities/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AccountEmployee extends StatefulWidget {

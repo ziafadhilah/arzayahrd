@@ -6,8 +6,8 @@ import 'package:get/get.dart';
 
 import 'package:intl/intl.dart';
 import 'package:http/http.dart' as http;
-import 'package:magentahrdios/utalities/color.dart';
-import 'package:magentahrdios/vaidasi/validator.dart';
+import 'package:arzayahrd/utalities/color.dart';
+import 'package:arzayahrd/vaidasi/validator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 

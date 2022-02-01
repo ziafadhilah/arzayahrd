@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:magentahrdios/utalities/constants.dart';
+import 'package:arzayahrd/utalities/constants.dart';
 
 
 class DetailEmployee extends StatefulWidget {

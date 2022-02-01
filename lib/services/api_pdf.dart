@@ -4,9 +4,9 @@
 //
 //
 // import 'package:intl/intl.dart';
-// import 'package:magentahrdios/models/invoice.dart';
-// import 'package:magentahrdios/models/pdf.dart';
-// import 'package:magentahrdios/services/pdf_pyslip_api.dart';
+// import 'package:arzayahrd/models/invoice.dart';
+// import 'package:arzayahrd/models/pdf.dart';
+// import 'package:arzayahrd/services/pdf_pyslip_api.dart';
 // import 'package:pdf/pdf.dart';
 // import 'package:pdf/widgets.dart' as pw;
 // import 'package:pdf/widgets.dart';

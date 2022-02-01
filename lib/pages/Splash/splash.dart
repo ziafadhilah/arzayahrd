@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:magentahrdios/pages/employee/login/login.dart';
-import 'package:magentahrdios/pages/opening/welcome.dart';
-import 'package:magentahrdios/utalities/color.dart';
-import 'package:magentahrdios/utalities/constants.dart';
+import 'package:arzayahrd/pages/employee/login/login.dart';
+import 'package:arzayahrd/pages/opening/welcome.dart';
+import 'package:arzayahrd/utalities/color.dart';
+import 'package:arzayahrd/utalities/constants.dart';
 
 class SplassScreen extends StatefulWidget {
   @override

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:magentahrdios/pages/admin/login/admin.dart';
+import 'package:arzayahrd/pages/admin/login/admin.dart';
 
-import 'package:magentahrdios/pages/employee/login/login.dart';
-import 'package:magentahrdios/pages/employee/nav.dart';
-import 'package:magentahrdios/utalities/color.dart';
-import 'package:magentahrdios/utalities/constants.dart';
+import 'package:arzayahrd/pages/employee/login/login.dart';
+import 'package:arzayahrd/pages/employee/nav.dart';
+import 'package:arzayahrd/utalities/color.dart';
+import 'package:arzayahrd/utalities/constants.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 

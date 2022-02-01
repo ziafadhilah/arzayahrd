@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:magentahrdios/pages/employee/login/login.dart';
+import 'package:arzayahrd/pages/employee/login/login.dart';
 
-import 'package:magentahrdios/pages/opening/welcome.dart';
+import 'package:arzayahrd/pages/opening/welcome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreference {

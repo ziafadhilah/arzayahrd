@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:magentahrdios/pages/employee/account/account.dart';
+import 'package:arzayahrd/pages/employee/account/account.dart';
 
-import 'package:magentahrdios/pages/employee/home/home.dart';
-import 'package:magentahrdios/utalities/color.dart';
+import 'package:arzayahrd/pages/employee/home/home.dart';
+import 'package:arzayahrd/utalities/color.dart';
 
 class NavBarEmployee extends StatefulWidget {
   @override

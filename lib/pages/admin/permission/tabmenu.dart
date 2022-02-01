@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'package:magentahrdios/pages/admin/permission/list.dart';
-import 'package:magentahrdios/utalities/color.dart';
+import 'package:arzayahrd/pages/admin/permission/list.dart';
+import 'package:arzayahrd/utalities/color.dart';
 
 class TabmenuPermissionPageAdmin extends StatelessWidget {
   List<Widget> containers = [

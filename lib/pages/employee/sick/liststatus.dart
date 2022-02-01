@@ -5,12 +5,12 @@ import 'package:format_indonesia/format_indonesia.dart';
 import 'package:get/get.dart';
 
 import 'package:intl/intl.dart';
-import 'package:magentahrdios/pages/employee/permission/shimmer_effect.dart';
-import 'package:magentahrdios/pages/employee/sick/edit.dart';
-import 'package:magentahrdios/pages/employee/sick/tabmenu.dart';
-import 'package:magentahrdios/services/api_clien.dart';
-import 'package:magentahrdios/utalities/color.dart';
-import 'package:magentahrdios/utalities/constants.dart';
+import 'package:arzayahrd/pages/employee/permission/shimmer_effect.dart';
+import 'package:arzayahrd/pages/employee/sick/edit.dart';
+import 'package:arzayahrd/pages/employee/sick/tabmenu.dart';
+import 'package:arzayahrd/services/api_clien.dart';
+import 'package:arzayahrd/utalities/color.dart';
+import 'package:arzayahrd/utalities/constants.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';

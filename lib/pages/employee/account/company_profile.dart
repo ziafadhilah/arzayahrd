@@ -4,8 +4,8 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
-import 'package:magentahrdios/services/api_clien.dart';
-import 'package:magentahrdios/utalities/color.dart';
+import 'package:arzayahrd/services/api_clien.dart';
+import 'package:arzayahrd/utalities/color.dart';
 import 'package:toast/toast.dart';
 
 class company_pfrofile extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:magentahrdios/utalities/color.dart';
-import 'package:magentahrdios/vaidasi/validator.dart';
+import 'package:arzayahrd/utalities/color.dart';
+import 'package:arzayahrd/vaidasi/validator.dart';
 
 class change_password extends StatefulWidget {
   change_password({this.email, this.username, this.id});

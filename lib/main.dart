@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:magentahrdios/pages/Splash/splash.dart';
-import 'package:magentahrdios/utalities/color.dart';
+import 'package:arzayahrd/pages/Splash/splash.dart';
+import 'package:arzayahrd/utalities/color.dart';
 
 //baru
 

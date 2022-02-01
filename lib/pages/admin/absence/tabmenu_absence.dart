@@ -1,9 +1,9 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:magentahrdios/pages/admin/absence/approved.dart';
-import 'package:magentahrdios/pages/admin/absence/pending.dart';
-import 'package:magentahrdios/pages/admin/absence/rejected.dart';
+import 'package:arzayahrd/pages/admin/absence/approved.dart';
+import 'package:arzayahrd/pages/admin/absence/pending.dart';
+import 'package:arzayahrd/pages/admin/absence/rejected.dart';
 
 
 
