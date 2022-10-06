@@ -95,6 +95,7 @@ class Validasi {
       distance,
       office_latitude,
       office_longitude,
+      categoryAbsence,
       category) {
     // if (departement_name == "office") {
     //   if (category == "present") {
@@ -165,7 +166,7 @@ class Validasi {
           gravity: Toast.BOTTOM);
     } else {
       if (distance > 20) {
-        // if (photos != 'null') {
+        if (photos != 'null') {
           print(photos.toString());
           if (remark.toString().isNotEmpty) {
             services.checkin(
@@ -180,19 +181,31 @@ class Validasi {
                 "approved",
                 office_latitude,
                 office_longitude,
+                categoryAbsence,
                 category);
           } else {
             Toast.show("Catatan wajib dimasukan", context,
                 duration: 5, gravity: Toast.BOTTOM);
           }
-       // }
-        // else {
-        //   Toast.show("Ambil terlebih dahulu photo anda", context,
-        //       duration: 5, gravity: Toast.BOTTOM);
-        // }
+        } else {
+          Toast.show("Ambil terlebih dahulu photo anda", context,
+              duration: 5, gravity: Toast.BOTTOM);
+        }
       } else {
-        services.checkin(context, photos, remark, employee_id, lat, long, date,
-            time, "approved", office_latitude, office_longitude, category);
+        services.checkin(
+            context,
+            photos,
+            remark,
+            employee_id,
+            lat,
+            long,
+            date,
+            time,
+            "approved",
+            office_latitude,
+            office_longitude,
+            categoryAbsence,
+            category);
       }
     }
     // if ((category == "present")) {
@@ -266,7 +279,8 @@ class Validasi {
       distance,
       office_latitude,
       office_longitude,
-      category) {
+      category,
+      isLembur) {
     if ((lat.toString() == "null") || (long.toString() == "null")) {
       Toast.show(
           "system tidak menemukan lokasi anda,aktifkan terlebih dahulu GPS device anda",
@@ -290,7 +304,8 @@ class Validasi {
                 "approved",
                 office_latitude,
                 office_longitude,
-                category);
+                category,
+                isLembur);
           } else {
             Toast.show("Catatan wajib dimasukan", context,
                 duration: 5, gravity: Toast.BOTTOM);
@@ -300,8 +315,20 @@ class Validasi {
               duration: 5, gravity: Toast.BOTTOM);
         }
       } else {
-        services.checkout(context, photos, remark, employee_id, lat, long, date,
-            time, "approved", office_latitude, office_longitude, category);
+        services.checkout(
+            context,
+            photos,
+            remark,
+            employee_id,
+            lat,
+            long,
+            date,
+            time,
+            "approved",
+            office_latitude,
+            office_longitude,
+            category,
+            isLembur);
       }
     }
     // if (departement_name == "office") {
@@ -470,7 +497,6 @@ class Validasi {
         print(description);
         services.sickEdit(context, id, employee_id, date_of_filling, sick_dates,
             old_sick_dates, description);
-
       }
     }
   }

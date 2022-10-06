@@ -851,7 +851,7 @@ class _AccountEmployeeState extends State<AccountEmployee> {
           children: [
             _buildHeader(),
             Container(
-              margin: EdgeInsets.only(top: 20),
+              margin: EdgeInsets.only(top: 10),
               child: Column(
                 children: <Widget>[
                   _buildprofile(),
@@ -871,7 +871,7 @@ class _AccountEmployeeState extends State<AccountEmployee> {
   Widget _buildHeader() {
     return Container(
       width: Get.mediaQuery.size.width,
-      height: Get.mediaQuery.size.height * 0.3,
+      height: Get.mediaQuery.size.height * 0.3+10,
       color: baseColor,
       child: Column(
         children: <Widget>[
@@ -887,6 +887,7 @@ class _AccountEmployeeState extends State<AccountEmployee> {
               : Container(
                   margin: EdgeInsets.only(top: 50),
                   child: CircleAvatar(
+                    backgroundColor: Colors.black.withOpacity(0.2),
                     radius: 35,
                     backgroundImage: NetworkImage("${image_ur}/${photo}"),
                   ),
@@ -904,7 +905,7 @@ class _AccountEmployeeState extends State<AccountEmployee> {
             ),
           ),
           SizedBox(
-            height: 15,
+            height: 7,
           ),
           Container(
             child: Text(

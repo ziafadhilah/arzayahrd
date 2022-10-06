@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 import 'package:arzayahrd/services/api_clien.dart';
 import 'package:arzayahrd/utalities/color.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class DetailProfile extends StatefulWidget {
   var id;
@@ -16,7 +18,13 @@ class DetailProfile extends StatefulWidget {
   _DetailProfileState createState() => _DetailProfileState();
 }
 
-class _DetailProfileState extends State<DetailProfile> {
+final List<Tab> tabs = <Tab>[
+  Tab(text: 'Detail'),
+  Tab(text: 'Absen'),
+];
+
+class _DetailProfileState extends State<DetailProfile>
+    with SingleTickerProviderStateMixin {
   var first_name,
       bank_account_name,
       bank_account_owner,
@@ -60,10 +68,26 @@ class _DetailProfileState extends State<DetailProfile> {
       number_card_bpjs,
       efective_date_bpjs;
   bool _isLoading = false;
+  var startDate, endDate, category;
+
+  List dataList = [];
+
+  TabController? tabController;
+
+  String dropdownvalue = 'Hadir';
+  String _range = '';
+
+  var items = [
+    'Cuti',
+    'Hadir',
+    'Izin',
+    'Sakit',
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios, color: Colors.white),
@@ -92,18 +116,51 @@ class _DetailProfileState extends State<DetailProfile> {
                     height: Get.mediaQuery.size.width,
                     child: Center(
                       child: CircularProgressIndicator(),
-                    ))
-                : Container(
-                    child: Column(
-                      children: <Widget>[
-                        _buildProfile(),
-                        Container(child: personalInformation()),
-                        contactInformation(),
-                        bankAccount(),
-                        NPWPInformation(),
-                        BPJSInformation()
-                      ],
                     ),
+                  )
+                : Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: _buildProfile(),
+                      ),
+                      Container(
+                        child: TabBar(
+                          controller: tabController,
+                          labelColor: Colors.black87,
+                          unselectedLabelColor: Colors.grey,
+                          tabs: tabs,
+                        ),
+                      ),
+                      Container(
+                        margin: EdgeInsets.all(10),
+                        width: double.maxFinite,
+                        height: MediaQuery.of(context).size.height / 1.5,
+                        child: AspectRatio(
+                          aspectRatio: 1,
+                          child: TabBarView(
+                            controller: tabController,
+                            children: [
+                              SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    personalInformation(),
+                                    contactInformation(),
+                                    bankAccount(),
+                                    NPWPInformation(),
+                                    BPJSInformation(),
+                                  ],
+                                ),
+                              ),
+                              // DetailAbsence(),
+                              Container(
+                                child: getAllAbsence(),
+                              ),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
                   ),
           ),
         ));
@@ -118,7 +175,7 @@ class _DetailProfileState extends State<DetailProfile> {
             child: photo != null
                 ? CircleAvatar(
                     backgroundImage: NetworkImage("${image_ur}/$photo"),
-                    backgroundColor: Colors.transparent,
+                    backgroundColor: Colors.black.withOpacity(0.2),
                     radius: 30,
                   )
                 : Container(
@@ -204,6 +261,291 @@ class _DetailProfileState extends State<DetailProfile> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget getAllAbsence() {
+    var _controller = TextEditingController(text: _range);
+    return Column(children: [
+      Container(
+        width: Get.mediaQuery.size.width,
+        padding: EdgeInsets.all(8.0),
+        child: ElevatedButton(
+          child: Icon(Icons.date_range),
+          onPressed: () {
+            showModalBottomSheet<void>(
+              context: context,
+              builder: (BuildContext context) {
+                return Container(
+                  height: 350,
+                  // color: Colors.amber,
+                  child: Center(
+                    child: SfDateRangePicker(
+                      view: DateRangePickerView.year,
+                      selectionMode: DateRangePickerSelectionMode.range,
+                      showActionButtons: true,
+                      onSubmit: (Object? val) {
+                        _onSubmitChanged(val!);
+                      },
+                      onCancel: () {
+                        // return null;
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                );
+              },
+            );
+          },
+          style: ElevatedButton.styleFrom(
+            primary: baseColor,
+          ),
+        ),
+      ),
+      Card(
+        child: Container(
+            width: MediaQuery.of(context).size.width,
+            padding: EdgeInsets.all(8.0),
+            child: TextField(
+              controller: _controller,
+              readOnly: true,
+              decoration: InputDecoration(
+                suffixIcon: IconButton(
+                  onPressed: _controller.clear,
+                  icon: Icon(Icons.clear),
+                ),
+              ),
+            )),
+      ),
+      Card(
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.only(left: 8.0, right: 8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Pilih Status Kehadiran Berdasarkan :',
+                style: TextStyle(
+                    fontFamily: "Roboto-medium",
+                    fontSize: 14,
+                    color: Colors.black,
+                    letterSpacing: 0.5),
+              ),
+              DropdownButtonHideUnderline(
+                child: DropdownButton(
+                  value: dropdownvalue,
+                  icon: Icon(Icons.keyboard_arrow_down),
+                  items: items.map((String items) {
+                    return DropdownMenuItem(
+                      value: items,
+                      child: Text(
+                        items,
+                        style: TextStyle(
+                            fontFamily: "Roboto-medium",
+                            fontSize: 14,
+                            color: Colors.black,
+                            letterSpacing: 0.5),
+                      ),
+                    );
+                  }).toList(),
+                  onChanged: (String? newValue) {
+                    setState(() {
+                      dropdownvalue = newValue!;
+                      category = newValue == "Hadir"
+                          ? "present"
+                          : newValue == "Sakit"
+                              ? "sick"
+                              : newValue == "Izin"
+                                  ? "persmission"
+                                  : newValue == "Cuti"
+                                      ? "leave"
+                                      : "";
+                      filterAbsenceEmployee(context);
+                    });
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      SizedBox(
+        height: 10,
+      ),
+      Expanded(
+        child: SingleChildScrollView(
+          child: Container(
+            child: getDataListArrayObject(),
+          ),
+        ),
+      ),
+      // getDataListArrayObject(),
+      // Card(
+      //   elevation: 3,
+      //   child: Column(
+      //     mainAxisAlignment: MainAxisAlignment.start,
+      //     crossAxisAlignment: CrossAxisAlignment.start,
+      //     children: [
+      //       Container(
+      //         padding: EdgeInsets.all(8.0),
+      //         child: Row(
+      //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //           children: [
+      //             Text(
+      //               _range,
+      //               style: TextStyle(
+      //                 fontFamily: "Roboto-bold",
+      //                 fontSize: 13,
+      //                 letterSpacing: 0.5,
+      //               ),
+      //             ),
+      //             Text(dropdownvalue),
+      //           ],
+      //         ),
+      //       ),
+      //       Divider(
+      //         height: 1,
+      //         color: blackColor3,
+      //       ),
+      //       Container(
+      //         // flex: 3,
+      //         padding: EdgeInsets.all(10.0),
+      //         child: getDataListArrayObject(),
+      //       ),
+      //     ],
+      //   ),
+      // ),
+    ]);
+  }
+
+  Widget getDataListArrayObject() {
+    return Column(
+      children: List.generate(dataList.length, (index) {
+        var attendance = dataList[index];
+        return Card(
+          // margin: EdgeInsets.only(top: 5, left: 30, right: 30),
+          elevation: 3,
+          child: Container(
+            padding: EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      attendance['date'],
+                      style: TextStyle(
+                          fontFamily: "Roboto-medium",
+                          fontSize: 14,
+                          color: Colors.black,
+                          letterSpacing: 0.5),
+                    ),
+                    Text(
+                      attendance['checkin_category'] == 'present'
+                          ? 'Hadir'
+                          : attendance['checkin_category'] == 'sick'
+                              ? 'Sakit'
+                              : attendance['checkin_category'] == 'permission'
+                                  ? "Izin"
+                                  : attendance['checkin_category'] == 'leave'
+                                      ? 'Cuti'
+                                      : '',
+                      style: TextStyle(
+                          fontFamily: "Roboto-medium",
+                          fontSize: 14,
+                          color: Colors.black,
+                          letterSpacing: 0.5),
+                    ),
+                  ],
+                ),
+                Divider(
+                  color: Colors.black12,
+                  thickness: 2,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Column(
+                      children: [
+                        Text(
+                          'Check-in',
+                          style: TextStyle(
+                              fontFamily: "Roboto-medium",
+                              fontSize: 14,
+                              color: Colors.green,
+                              letterSpacing: 0.5),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        attendance['clock_in'] == null
+                            ? Text(
+                                'No Data',
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontFamily: "Roboto-medium",
+                                    fontSize: 14,
+                                    letterSpacing: 0.5),
+                              )
+                            : Text(
+                                attendance['clock_in'],
+                                style: TextStyle(
+                                    fontFamily: "Roboto-medium",
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                    letterSpacing: 0.5),
+                              ),
+                      ],
+                    ),
+                    Container(
+                      height: 75,
+                      width: 1,
+                      color: Colors.black,
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          'Check-out',
+                          style: TextStyle(
+                              fontFamily: "Roboto-medium",
+                              fontSize: 14,
+                              color: Colors.red,
+                              letterSpacing: 0.5),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        attendance['clock_out'] == null
+                            ? Text(
+                                'No Data',
+                                style: TextStyle(
+                                    color: Colors.red,
+                                    fontFamily: "Roboto-medium",
+                                    fontSize: 14,
+                                    letterSpacing: 0.5),
+                              )
+                            : Text(
+                                attendance['clock_out'],
+                                style: TextStyle(
+                                    fontFamily: "Roboto-medium",
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                    letterSpacing: 0.5),
+                              ),
+                      ],
+                    ),
+                  ],
+                ),
+                Divider(
+                  color: Colors.black12,
+                  thickness: 2,
+                ),
+              ],
+            ),
+          ),
+        );
+      }),
     );
   }
 
@@ -2501,10 +2843,48 @@ class _DetailProfileState extends State<DetailProfile> {
     }
   }
 
+  Future filterAbsenceEmployee(BuildContext context) async {
+    setState(() {
+      _isLoading = true;
+    });
+    final response = await http.get(Uri.parse(
+        '$base_url/api/employees/${widget.id}/attendances?start_date=$startDate&end_date=$endDate&category=$category'));
+    final data = jsonDecode(response.body);
+    if (data['code'] == 200) {
+      setState(() {
+        _isLoading = false;
+        dataList = data['data'];
+      });
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _employee(context);
+    tabController = new TabController(length: tabs.length, vsync: this);
+  }
+
+  void _onSubmitChanged(Object val) {
+    setState(() {
+      if (val is PickerDateRange) {
+        _range = DateFormat('dd/MM/yyyy').format(val.startDate).toString() +
+            ' - ' +
+            DateFormat('dd/MM/yyyy')
+                .format(val.endDate ?? val.startDate)
+                .toString();
+
+        startDate = val.startDate;
+        endDate = val.endDate;
+
+        filterAbsenceEmployee(context);
+        Navigator.pop(context);
+      }
+    });
   }
 }

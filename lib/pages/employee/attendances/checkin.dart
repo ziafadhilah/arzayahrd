@@ -127,10 +127,10 @@ class _CheckinPageState extends State<CheckinPage> {
                       SizedBox(
                         height: 15,
                       ),
-                      // _buildCategoryabsence(),
-                      // SizedBox(
-                      //   height: 15,
-                      // ),
+                      _buildCategoryabsence(),
+                      SizedBox(
+                        height: 15,
+                      ),
                       _buildLocation(),
                       SizedBox(
                         height: 10,
@@ -284,7 +284,7 @@ class _CheckinPageState extends State<CheckinPage> {
       children: [
         Container(
           height: 20,
-          margin: EdgeInsets.only(left: 25),
+          margin: EdgeInsets.only(left: 30),
           child: TextFormField(
             enabled: false,
             cursorColor: Theme.of(context).cursorColor,
@@ -337,9 +337,8 @@ class _CheckinPageState extends State<CheckinPage> {
                 style: TextStyle(color: Colors.black),
 
                 items: <String>[
-                  'Present',
-                  'Sick',
-                  'Permission',
+                  'Kantor',
+                  'Perdin',
                 ].map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -347,16 +346,16 @@ class _CheckinPageState extends State<CheckinPage> {
                   );
                 }).toList(),
                 hint: Text(
-                  "Present",
+                  "Kantor",
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
                   ),
                 ),
                 onChanged: (String? value) {
-                  // setState(() {
-                  //   _category_absent = value;
-                  // });
+                  setState(() {
+                    _category_absent = value;
+                  });
                 },
               ),
             ),
@@ -497,8 +496,10 @@ class _CheckinPageState extends State<CheckinPage> {
                   )
                 : Container(
                     width: 10,
-                    height: 10  ,
-                    child: CircularProgressIndicator(color: baseColor1,),
+                    height: 10,
+                    child: CircularProgressIndicator(
+                      color: baseColor1,
+                    ),
                   )),
         // child: Card(
         //   color: baseColor,
@@ -520,52 +521,69 @@ class _CheckinPageState extends State<CheckinPage> {
   }
 
   Future upload() async {
-    print("data base 64 ${base64}");
+    print(_category_absent);
     var date = DateFormat("yyyy:MM:dd").format(DateTime.now());
     if (_category_absent == null) {
-      _category_absent = "Present";
+      _category_absent = "Kantor";
     }
 
-    if (_category_absent.toString().toLowerCase() != 'present') {
-      if (base64.toString() == "null") {
-        Toast.show("Foto wajib digunakan", context,
-            duration: 5, gravity: Toast.BOTTOM);
-      } else if (Cremark.text.toString().isEmpty) {
-        Toast.show("Remarks tidak boleh kosong", context,
-            duration: 5, gravity: Toast.BOTTOM);
-      } else {
-        Toast.show("$_category_absent", context);
-        validation_checkin(
-            context,
-            base64.toString(),
-            Cremark.text,
-            _latitude.toString(),
-            _longitude.toString(),
-            _employee_id,
-            date,
-            time,
-            _departement_name,
-            _distance,
-            _lat_mainoffice,
-            _long_mainoffice,
-            "present");
-      }
-    } else {
-      validation_checkin(
-          context,
-          base64.toString(),
-          Cremark.text,
-          _latitude.toString(),
-          _longitude.toString(),
-          _employee_id,
-          date,
-          time,
-          _departement_name,
-          _distance,
-          _lat_mainoffice,
-          _long_mainoffice,
-          _category_absent.toString().toLowerCase());
-    }
+    validation_checkin(
+      context,
+      base64.toString(),
+      Cremark.text,
+      _latitude.toString(),
+      _longitude.toString(),
+      _employee_id,
+      date,
+      time,
+      _departement_name,
+      _distance,
+      _lat_mainoffice,
+      _long_mainoffice,
+      _category_absent,
+      "present",
+    );
+
+    // if (_category_absent.toString().toLowerCase() != 'present') {
+    //   if (base64.toString() == "null") {
+    //     Toast.show("Foto wajib digunakan", context,
+    //         duration: 5, gravity: Toast.BOTTOM);
+    //   } else if (Cremark.text.toString().isEmpty) {
+    //     Toast.show("Remarks tidak boleh kosong", context,
+    //         duration: 5, gravity: Toast.BOTTOM);
+    //   } else {
+    //     Toast.show("$_category_absent", context);
+    //     validation_checkin(
+    //         context,
+    //         base64.toString(),
+    //         Cremark.text,
+    //         _latitude.toString(),
+    //         _longitude.toString(),
+    //         _employee_id,
+    //         date,
+    //         time,
+    //         _departement_name,
+    //         _distance,
+    //         _lat_mainoffice,
+    //         _long_mainoffice,
+    //         "present");
+    //   }
+    // } else {
+    //   validation_checkin(
+    //       context,
+    //       base64.toString(),
+    //       Cremark.text,
+    //       _latitude.toString(),
+    //       _longitude.toString(),
+    //       _employee_id,
+    //       date,
+    //       time,
+    //       _departement_name,
+    //       _distance,
+    //       _lat_mainoffice,
+    //       _long_mainoffice,
+    //       _category_absent.toString().toLowerCase());
+    // }
   }
 
   ///fucntion
@@ -704,22 +722,14 @@ class _CheckinPageState extends State<CheckinPage> {
 
   @override
   void dispose() {
+    _disposed = true;
     super.dispose();
   }
 
   @override
   void initState() {
-    // location.onLocationChanged.listen((LocationData currentLocation) {
-    //   setState(() {
-    //     _latitude = currentLocation.latitude.toString();
-    //     _longitude = currentLocation.longitude.toString();
-    //
-    //   });
-    //   // Use current location
-    // });
-
     super.initState();
-
+    _getCurrentLocation();
     _startJam();
     _getDataPref();
   }

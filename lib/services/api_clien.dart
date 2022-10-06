@@ -16,7 +16,10 @@ import 'package:toast/toast.dart';
 // String base_url = "https://hrd.magentamediatama.net";
 // String image_ur = "https://arenzha.s3.ap-southeast-1.amazonaws.com";
 String base_url = "https://hrd.arzaya.net";
-String image_ur = "https://hrd.arzaya.net";
+// String base_url = "http://192.168.100.23:8000"; //arzaya
+// String base_url = "http://192.168.0.102:8000"; //arenzha
+// String base_url = "http://192.168.248.142:8000"; //tethering
+String image_ur = "https://arzaya-hrd.s3.ap-southeast-1.amazonaws.com";
 String baset_url_event = "https://react.magentamediatama.net";
 
 class Services {
@@ -219,6 +222,7 @@ class Services {
       status,
       office_latitude,
       office_longitude,
+      categoryAbsence,
       category) async {
     loading(context);
 
@@ -235,7 +239,8 @@ class Services {
       "category": "$category",
       "office_latitude": office_latitude,
       "office_longitude": office_longitude,
-      "screen": "DetailAttendanceAdmin"
+      "screen": "DetailAttendanceAdmin",
+      'is_official_travel': "${categoryAbsence == "Kantor" ? "0" : "1"}"
     });
 
     final responseJson = jsonDecode(response.body);
@@ -266,7 +271,8 @@ class Services {
       status,
       office_latitude,
       office_longitude,
-      category) async {
+      category,
+      isLembur) async {
     loading(context);
     final response = await http
         .post(Uri.parse("$base_url/api/attendances/action/check-out"), body: {
@@ -281,7 +287,8 @@ class Services {
       "category": "$category",
       "office_latitude": office_latitude,
       "office_longitude": office_longitude,
-      "screen": "DetailAttendanceAdmin"
+      "screen": "DetailAttendanceAdmin",
+      "is_overtime": isLembur.toString()
     });
 
     final responseJson = jsonDecode(response.body);

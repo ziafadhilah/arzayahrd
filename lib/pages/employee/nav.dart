@@ -1,3 +1,5 @@
+import 'package:arzayahrd/pages/employee/career/tabmenu.dart';
+import 'package:arzayahrd/pages/employee/sop/files.dart';
 import 'package:flutter/material.dart';
 import 'package:arzayahrd/pages/employee/account/account.dart';
 
@@ -57,9 +59,76 @@ class _NavBarEmployeeState extends State<NavBarEmployee> {
                         Text(
                           'Home',
                           style: TextStyle(
-                              color:
-                                  currentTab == 0 ? baseColor : blackColor3,
-                              fontFamily: "Roboto-medium",letterSpacing: 0.5,fontSize: 11),
+                              color: currentTab == 0 ? baseColor : blackColor3,
+                              fontFamily: "Roboto-medium",
+                              letterSpacing: 0.5,
+                              fontSize: 11),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  MaterialButton(
+                    minWidth: 40,
+                    onPressed: () {
+                      setState(() {
+                        currentScreen =
+                            TabsmenuCareer(); // if user taps on this dashboard tab will be active
+                        currentTab = 1;
+                      });
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.list_outlined,
+                          color: currentTab == 1 ? baseColor : blackColor3,
+                        ),
+                        Text(
+                          'Review',
+                          style: TextStyle(
+                              color: currentTab == 1 ? baseColor : blackColor3,
+                              fontFamily: "Roboto-medium",
+                              letterSpacing: 0.5,
+                              fontSize: 11),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  MaterialButton(
+                    minWidth: 40,
+                    onPressed: () {
+                      setState(() {
+                        currentScreen =
+                            Files(); // if user taps on this dashboard tab will be active
+                        currentTab = 2;
+                      });
+                    },
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Icon(
+                          Icons.file_copy,
+                          color: currentTab == 2 ? baseColor : blackColor3,
+                        ),
+                        Text(
+                          'Files',
+                          style: TextStyle(
+                              color: currentTab == 2 ? baseColor : blackColor3,
+                              fontFamily: "Roboto-medium",
+                              letterSpacing: 0.5,
+                              fontSize: 11),
                         ),
                       ],
                     ),
@@ -91,9 +160,10 @@ class _NavBarEmployeeState extends State<NavBarEmployee> {
                         Text(
                           'Akun',
                           style: TextStyle(
-                              color:
-                                  currentTab == 3 ? baseColor : blackColor3,
-                              fontFamily: "Roboto-medium",letterSpacing: 0.5,fontSize: 11),
+                              color: currentTab == 3 ? baseColor : blackColor3,
+                              fontFamily: "Roboto-medium",
+                              letterSpacing: 0.5,
+                              fontSize: 11),
                         ),
                       ],
                     ),

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:arzayahrd/pages/employee/official_travel/official_travel.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -43,6 +44,7 @@ class _HomeEmployeeState extends State<HomeEmployee> {
   bool _loading = true;
   var user_id, address, name;
   var employeeId, photo;
+  var officialTravelLength = 0;
 
   //-----main menu-----
   Widget _buildMenucheckin() {
@@ -74,8 +76,7 @@ class _HomeEmployeeState extends State<HomeEmployee> {
               fontSize: 12,
               fontFamily: "Roboto-regular",
               fontWeight: FontWeight.w500,
-              letterSpacing: 0.5
-          ))
+              letterSpacing: 0.5))
     ]);
   }
 
@@ -374,14 +375,16 @@ class _HomeEmployeeState extends State<HomeEmployee> {
                             _buildMenucheckin(),
                             _buildMenucheckout(),
                             _buildMenuaabsence(),
-                            _buildMenuloan()
+                            _buildmenupyslip(),
+                            // _buildMenuloan()
                           ],
                         ),
                         Container(
                             child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            _buildmenupyslip(),
+                            _officialTravel(),
+                            // _buildmenupyslip(),
                             _buildMenupermission(),
                             _buildMenusick(),
                             _buildMenuoffwork(),
@@ -401,7 +404,74 @@ class _HomeEmployeeState extends State<HomeEmployee> {
 
   //----end main menu---
 
-
+  Widget _officialTravel() {
+    return Column(children: <Widget>[
+      SizedBox(
+        width: 70,
+        height: 70,
+        child: InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                PageTransition(
+                    type: PageTransitionType.rightToLeft,
+                    child: OfficialTravelPage()));
+            // Navigator.push(
+            //     context,
+            //     MaterialPageRoute(
+            //         builder: (context) => ListLoanEmployeePage()));
+          },
+          child: Stack(
+            children: [
+              Card(
+                elevation: 1,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+                child: Container(
+                    margin: EdgeInsets.all(15.0),
+                    child: Image.asset(
+                      "assets/travel.png",
+                      width: 35,
+                      height: 35,
+                    )),
+              ),
+              Container(
+                child: Container(
+                  margin: EdgeInsets.only(top: 15, right: 10),
+                  width: double.maxFinite,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                        child: officialTravelLength == 0
+                            ? Text("")
+                            : CircleAvatar(
+                                radius: 10,
+                                backgroundColor: Colors.redAccent,
+                                child: Text(
+                                  "${officialTravelLength}",
+                                  style: TextStyle(color: Colors.white),
+                                ),
+                              ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+      const Text("Perdin",
+          style: TextStyle(
+              color: Colors.black,
+              fontSize: 12,
+              fontFamily: "Roboto-regular",
+              fontWeight: FontWeight.w500,
+              letterSpacing: 0.5))
+    ]);
+  }
 
   Widget _buildteam(index_member, index) {
     return Container(

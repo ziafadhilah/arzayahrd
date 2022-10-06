@@ -12,10 +12,7 @@ void loading(BuildContext context) {
   ProgressDialog progressDialog = ProgressDialog(context);
   progressDialog.style(message: "Loading ...");
   progressDialog.show();
-
 }
-
-
 
 void alert_error(BuildContext context, var title, text_button) {
   Alert(
@@ -204,6 +201,7 @@ void validation_checkin(
     distance,
     office_latitude,
     office_longitude,
+    categoryAbsen,
     category) {
   Validasi validator = new Validasi();
   Alert(
@@ -218,9 +216,9 @@ void validation_checkin(
           "Iya",
           style: TextStyle(color: Colors.white, fontSize: 20),
         ),
-        onPressed: ()  {
-          var date=DateFormat('yyyy-MM-dd').format(DateTime.now());
-          var time=DateFormat('HH:mm:ss').format(DateTime.now());
+        onPressed: () {
+          var date = DateFormat('yyyy-MM-dd').format(DateTime.now());
+          var time = DateFormat('HH:mm:ss').format(DateTime.now());
           Navigator.pop(context);
           validator.validation_checkin(
               context,
@@ -235,6 +233,7 @@ void validation_checkin(
               distance,
               office_latitude,
               office_longitude,
+              categoryAbsen,
               category);
         },
         color: btnColor1,
@@ -264,16 +263,17 @@ void validation_checkout(
     distance,
     office_latitude,
     office_longitude,
-    category) {
+    category,
+    isLembur) {
   Validasi validator = new Validasi();
-  print(time);
+  print("isLembur ${isLembur}");
   Alert(
-
     context: context,
     type: AlertType.warning,
-    title: "Check Out ",
+    title: "${isLembur == 1 ? "Checkout Lembur" : "Checkout"}",
     // desc: "Apaka kamu yakin melakukan check out pada pukul ${time} ",
-    desc: "Apakah kamu yakin melakukan check out",
+    desc:
+        "Apakah kamu yakin melakukan ${isLembur == 1 ? "Checkout Lembur" : "Checkout"} ?",
     buttons: [
       DialogButton(
         child: Text(
@@ -282,8 +282,8 @@ void validation_checkout(
         ),
         onPressed: () {
           Navigator.pop(context);
-          var date=DateFormat('yyyy-MM-dd').format(DateTime.now());
-          var time=DateFormat('HH:mm:ss').format(DateTime.now());
+          var date = DateFormat('yyyy-MM-dd').format(DateTime.now());
+          var time = DateFormat('HH:mm:ss').format(DateTime.now());
           validator.validation_checkout(
               context,
               photos,
@@ -297,7 +297,8 @@ void validation_checkout(
               distance,
               office_latitude,
               office_longitude,
-              category);
+              category,
+              isLembur);
         },
         color: btnColor1,
       ),
@@ -313,12 +314,10 @@ void validation_checkout(
   ).show();
 }
 
-void alert_confirm_delete_leave(BuildContext context,id) {
+void alert_confirm_delete_leave(BuildContext context, id) {
   Services services = new Services();
   var Cremarks = new TextEditingController();
-
 }
-
 
 void toast_success(message) {
   Fluttertoast.showToast(

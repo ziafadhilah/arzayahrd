@@ -96,68 +96,69 @@ class _CheckoutPageState extends State<CheckoutPage> {
       ),
       body: _isLoading == true
           ? Center(
-        child: CircularProgressIndicator(),
-      )
+              child: CircularProgressIndicator(),
+            )
           : SingleChildScrollView(
-        child: Container(
-          color: Colors.white,
-          height: MediaQuery.of(context).size.height + 50,
-          child: Container(
-            child: Column(
-              children: <Widget>[
-                Container(
-                  child:
-                  _distance > 20 ? _builddistaceCompany() : Text(""),
-                ),
-                Container(
-                  margin: EdgeInsets.only(top: 15),
-                  child: _file.path == "0"
-                      ? _buildPhoto(context)
-                      : InkWell(
-                      onTap: () {
-                        aksesCamera();
-                        //_onAddPhotoClicked(context);
-                      },
-                      child: Container(
-                          width: 200,
-                          height: 200,
-                          child: Image.memory(webImage))),
-                ),
-                _buildText(),
-                SizedBox(
-                  height: 15,
-                ),
-                // _buildCategoryabsence(),
-                // SizedBox(
-                //   height: 15,
-                // ),
-                _buildLocation(),
-                SizedBox(
-                  height: 10,
-                ),
-                _buildremark(),
-                SizedBox(
-                  height: 10,
-                ),
-                _buildtime(),
-                Expanded(
-                  child: Container(
-                    margin: EdgeInsets.only(bottom: 10),
-                    width: double.infinity,
-                    height: MediaQuery.of(context).size.height,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        _buildfingerprint(),
-                      ],
-                    ),
+              child: Container(
+                color: Colors.white,
+                height: MediaQuery.of(context).size.height + 50,
+                child: Container(
+                  child: Column(
+                    children: <Widget>[
+                      Container(
+                        child:
+                            _distance > 20 ? _builddistaceCompany() : Text(""),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(top: 15),
+                        child: _file.path == "0"
+                            ? _buildPhoto(context)
+                            : InkWell(
+                                onTap: () {
+                                  aksesCamera();
+                                  //_onAddPhotoClicked(context);
+                                },
+                                child: Container(
+                                    width: 200,
+                                    height: 200,
+                                    child: Image.memory(webImage))),
+                      ),
+                      _buildText(),
+                      SizedBox(
+                        height: 15,
+                      ),
+                      // _buildCategoryabsence(),
+                      // SizedBox(
+                      //   height: 15,
+                      // ),
+                      _buildLocation(),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      _buildremark(),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      _buildtime(),
+                      Expanded(
+                        child: Container(
+                          width: double.infinity,
+                          height: MediaQuery.of(context).size.height,
+                          margin: EdgeInsets.only(left: 20, right: 20),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: <Widget>[
+                              _buildCheckout(),
+                              _buildCheckoutOvertime(),
+                            ],
+                          ),
+                        ),
+                      )
+                    ],
                   ),
-                )
-              ],
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
     );
   }
 
@@ -251,7 +252,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
               ),
               enabledBorder: OutlineInputBorder(
                 borderSide:
-                BorderSide(color: blackColor.withOpacity(0.5), width: 1.0),
+                    BorderSide(color: blackColor.withOpacity(0.5), width: 1.0),
                 borderRadius: BorderRadius.circular(5.0),
               ),
             ),
@@ -462,44 +463,45 @@ class _CheckoutPageState extends State<CheckoutPage> {
   }
 
   //Widger photo
-  Widget _buildfingerprint() {
+  Widget _buildCheckout() {
     return InkWell(
       onTap: () {
+        var isLembur = 0;
         if (_currentAddress != null) {
-          upload();
+          upload(isLembur);
         }
       },
       child: Container(
-        margin: EdgeInsets.only(left: 20, right: 20),
-
-        width: Get.mediaQuery.size.width,
+        width: Get.mediaQuery.size.width / 2 - 30,
 
         child: ElevatedButton(
             onPressed: () {
               if (_currentAddress != null) {
-                upload();
+                upload(0);
               }
             },
             style: ButtonStyle(
               backgroundColor: MaterialStateProperty.all(baseColor),
               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                   RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5.0),
-                  )),
+                borderRadius: BorderRadius.circular(5.0),
+              )),
             ),
             child: _currentAddress != null
                 ? Text(
-              "Checkout",
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontFamily: "Roboto-regular"),
-            )
+                    "Checkout",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 16,
+                        fontFamily: "Roboto-regular"),
+                  )
                 : Container(
-              width: 10,
-              height: 10  ,
-              child: CircularProgressIndicator(color: baseColor1,),
-            )),
+                    width: 10,
+                    height: 10,
+                    child: CircularProgressIndicator(
+                      color: baseColor1,
+                    ),
+                  )),
         // child: Card(
         //   color: baseColor,
         //
@@ -519,22 +521,152 @@ class _CheckoutPageState extends State<CheckoutPage> {
     );
   }
 
+  Widget _buildCheckoutOvertime() {
+    return InkWell(
+      onTap: () {
+        var isLembur = 1;
+        if (_currentAddress != null) {
+          upload(isLembur);
+        }
+      },
+      child: Container(
+        width: Get.mediaQuery.size.width / 2 - 30,
+        child: ElevatedButton(
+          onPressed: () {
+            if (_currentAddress != null) {
+              upload(1);
+            }
+          },
+          style: ButtonStyle(
+            backgroundColor: MaterialStateProperty.all(baseColor),
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5.0),
+            )),
+          ),
+          child: _currentAddress != null
+              ? Text(
+                  "Checkout Lembur",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontFamily: "Roboto-regular"),
+                )
+              : Container(
+                  width: 10,
+                  height: 10,
+                  child: CircularProgressIndicator(
+                    color: baseColor1,
+                  ),
+                ),
+        ),
+      ),
+    );
+  }
 
-  Future upload() async {
-    var date = DateFormat("yyyy:MM:dd").format(DateTime.now());
+  // Future upload() async {
+  //   var date = DateFormat("yyyy:MM:dd").format(DateTime.now());
+  //   if (_category_absent == null) {
+  //     _category_absent = "Present";
+  //   }
+  //
+  //   if (_category_absent.toString().toLowerCase() != 'present') {
+  //     if (base64.toString() == "null") {
+  //       Toast.show("Foto wajib digunakan", context,
+  //           duration: 5, gravity: Toast.BOTTOM);
+  //     } else if (Cremark.text.toString().isEmpty) {
+  //       Toast.show("Remarks tidak boleh kosong", context,
+  //           duration: 5, gravity: Toast.BOTTOM);
+  //     } else {
+  //       Toast.show("$_category_absent", context);
+  //       validation_checkout(
+  //           context,
+  //           base64.toString(),
+  //           Cremark.text,
+  //           _latitude.toString().trim(),
+  //           _longitude.toString().trim(),
+  //           _employee_id,
+  //           date,
+  //           time,
+  //           _departement_name,
+  //           _distance,
+  //           _lat_mainoffice,
+  //           _long_mainoffice,
+  //           "present");
+  //     }
+  //   } else {
+  //     validation_checkout(
+  //         context,
+  //         base64.toString(),
+  //         Cremark.text,
+  //         _latitude.toString(),
+  //         _longitude.toString(),
+  //         _employee_id,
+  //         date,
+  //         time,
+  //         _departement_name,
+  //         _distance,
+  //         _lat_mainoffice,
+  //         _long_mainoffice,
+  //         "present");
+  //   }
+  // }
+
+  Future upload(isLembur) async {
     if (_category_absent == null) {
       _category_absent = "Present";
     }
+    var date = DateFormat("yyyy:MM:dd").format(DateTime.now());
+    final startTime = DateTime.now();
+    // final t = Time(17, 1, 0);
 
-    if (_category_absent.toString().toLowerCase() != 'present') {
-      if (base64.toString() == "null") {
-        Toast.show("Foto wajib digunakan", context,
-            duration: 5, gravity: Toast.BOTTOM);
-      } else if (Cremark.text.toString().isEmpty) {
-        Toast.show("Remarks tidak boleh kosong", context,
-            duration: 5, gravity: Toast.BOTTOM);
+    if (DateTime.now().hour >= 17) {
+      if (DateTime.now().minute > 15) {
+        if (Cremark.text.toString().isEmpty) {
+          Toast.show("Catatan tidak boleh kosong", context,
+              duration: 5, gravity: Toast.BOTTOM);
+        } else {
+          validation_checkout(
+              context,
+              base64.toString(),
+              Cremark.text,
+              _latitude.toString().trim(),
+              _longitude.toString().trim(),
+              _employee_id,
+              date,
+              time,
+              _departement_name,
+              _distance,
+              _lat_mainoffice,
+              _long_mainoffice,
+              _category_absent.toString().toLowerCase(),
+              1);
+        }
+
+        // if (base64.toString() == "null") {
+        //   Toast.show("Foto wajib digunakan", context,
+        //       duration: 5, gravity: Toast.BOTTOM);
+        // } else if (Cremark.text.toString().isEmpty) {
+        //   Toast.show("Catatan tidak boleh kosong", context,
+        //       duration: 5, gravity: Toast.BOTTOM);
+        // } else {
+        //   //Toast.show("$_category_absent", context);
+        //   validation_checkout(
+        //       context,
+        //       base64.toString(),
+        //       Cremark.text,
+        //       _lat.toString().trim(),
+        //       _long.toString().trim(),
+        //       _employee_id,
+        //       date,
+        //       time,
+        //       _departement_name,
+        //       _distance,
+        //       _lat_mainoffice,
+        //       _long_mainoffice,
+        //       _category_absent.toString().toLowerCase());
+        // }
       } else {
-        Toast.show("$_category_absent", context);
         validation_checkout(
             context,
             base64.toString(),
@@ -548,15 +680,16 @@ class _CheckoutPageState extends State<CheckoutPage> {
             _distance,
             _lat_mainoffice,
             _long_mainoffice,
-            "present");
+            _category_absent.toString().toLowerCase(),
+            isLembur);
       }
     } else {
       validation_checkout(
           context,
           base64.toString(),
           Cremark.text,
-          _latitude.toString(),
-          _longitude.toString(),
+          _latitude.toString().trim(),
+          _longitude.toString().trim(),
           _employee_id,
           date,
           time,
@@ -564,9 +697,35 @@ class _CheckoutPageState extends State<CheckoutPage> {
           _distance,
           _lat_mainoffice,
           _long_mainoffice,
-          "present");
+          _category_absent.toString().toLowerCase(),
+          isLembur);
+
+      // if (base64.toString() == "null") {
+      //   Toast.show("Foto wajib digunakan", context,
+      //       duration: 5, gravity: Toast.BOTTOM);
+      // } else if (Cremark.text.toString().isEmpty) {
+      //   Toast.show("Catatan tidak boleh kosong", context,
+      //       duration: 5, gravity: Toast.BOTTOM);
+      // } else {
+      //   //Toast.show("$_category_absent", context);
+      //   validation_checkout(
+      //       context,
+      //       base64.toString(),
+      //       Cremark.text,
+      //       _lat.toString().trim(),
+      //       _long.toString().trim(),
+      //       _employee_id,
+      //       date,
+      //       time,
+      //       _departement_name,
+      //       _distance,
+      //       _lat_mainoffice,
+      //       _long_mainoffice,
+      //       _category_absent.toString().toLowerCase());
+      // }
     }
   }
+
   ///fucntion
   //akses kamera
   aksesCamera() async {
@@ -629,12 +788,12 @@ class _CheckoutPageState extends State<CheckoutPage> {
           ),
           Container(
               child: Text(
-                "Anda  berada di luar area kantor",
-                style: TextStyle(
-                    color: blackColor,
-                    fontFamily: "Roboto-regular",
-                    letterSpacing: 0.5),
-              ))
+            "Anda  berada di luar area kantor",
+            style: TextStyle(
+                color: blackColor,
+                fontFamily: "Roboto-regular",
+                letterSpacing: 0.5),
+          ))
         ],
       ),
     );
@@ -666,7 +825,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
           longitude: double.parse(_longitude.toString()));
       setState(() {
         _currentAddress =
-        "${address.streetAddress} ${address.region} ${address.city} ";
+            "${address.streetAddress} ${address.region} ${address.city} ";
       });
     } catch (e) {
       print(e);
@@ -685,6 +844,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
   /**/
   _getDistance(latMainoffice, longMainoffice, currentlat, currentlong) async {
     try {
+      _distance = 0;
       final double d = GeolocatorPlatform.instance.distanceBetween(
           double.parse(latMainoffice),
           double.parse(longMainoffice),
@@ -697,28 +857,20 @@ class _CheckoutPageState extends State<CheckoutPage> {
         // print(d);
       });
     } catch (e) {
-      print("${e}");
+      print(e);
     }
   }
 
   @override
   void dispose() {
+    _disposed = true;
     super.dispose();
   }
 
   @override
   void initState() {
-    // location.onLocationChanged.listen((LocationData currentLocation) {
-    //   setState(() {
-    //     _latitude = currentLocation.latitude.toString();
-    //     _longitude = currentLocation.longitude.toString();
-    //
-    //   });
-    //   // Use current location
-    // });
-
     super.initState();
-
+    _getCurrentLocation();
     _startJam();
     _getDataPref();
   }
@@ -729,7 +881,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         _isLoading = true;
       });
       http.Response response =
-      await http.get(Uri.parse("$base_url/api/employees/$id"));
+          await http.get(Uri.parse("$base_url/api/employees/$id"));
       _employee = jsonDecode(response.body);
 
       setState(() {
@@ -749,11 +901,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
 
       setState(() {
         _getCurrentLocation();
-
         _getDistance(_lat_mainoffice, _long_mainoffice, _latitude, _longitude);
       });
     } catch (e) {}
   }
 }
-
-
