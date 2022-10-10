@@ -158,46 +158,53 @@ class _MapsState extends State<Maps> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Stack(
-      children: <Widget>[
-        _map(),
-        AnimatedPositioned(
-          bottom: _pinPillPosition,
-          right: 0,
-          left: 0,
-          duration: Duration(milliseconds: 200),
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              margin: EdgeInsets.all(20),
-              height: 70,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(50)),
-                  boxShadow: <BoxShadow>[
-                    BoxShadow(
-                      blurRadius: 20,
-                      offset: Offset.zero,
-                      color: Colors.grey.withOpacity(0.5),
-                    )
-                  ]),
-            ),
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+            onPressed: () => Navigator.of(context).pop(),
           ),
+          backgroundColor: baseColor,
         ),
-        new Positioned(
-            top: MediaQuery.of(context).size.height * 0.6,
-            child: new Container(
-                width: MediaQuery.of(context).size.width,
-                height: MediaQuery.of(context).size.height / 2,
-                decoration: new BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: new BorderRadius.only(
-                      topLeft: const Radius.circular(5.0),
-                      topRight: const Radius.circular(5.0),
-                    )),
-                child: _info()))
-      ],
-    ));
+        body: Stack(
+          children: <Widget>[
+            _map(),
+            AnimatedPositioned(
+              bottom: _pinPillPosition,
+              right: 0,
+              left: 0,
+              duration: Duration(milliseconds: 200),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  margin: EdgeInsets.all(20),
+                  height: 70,
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
+                      boxShadow: <BoxShadow>[
+                        BoxShadow(
+                          blurRadius: 20,
+                          offset: Offset.zero,
+                          color: Colors.grey.withOpacity(0.5),
+                        )
+                      ]),
+                ),
+              ),
+            ),
+            new Positioned(
+                top: MediaQuery.of(context).size.height * 0.6,
+                child: new Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height / 2,
+                    decoration: new BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: new BorderRadius.only(
+                          topLeft: const Radius.circular(5.0),
+                          topRight: const Radius.circular(5.0),
+                        )),
+                    child: _info()))
+          ],
+        ));
   }
 
   // Widget _info() {

@@ -23,17 +23,17 @@ class MapsDetail extends StatefulWidget {
 
   MapsDetail(
       {this.address,
-        this.longitude,
-        this.latitude,
-        this.gender,
-        this.last_name,
-        this.firts_name,
-        this.profile_background,
-        this.distance,
-        this.longMainoffice,
-        this.latmainoffice,
-        this.image,
-        this.departement_name});
+      this.longitude,
+      this.latitude,
+      this.gender,
+      this.last_name,
+      this.firts_name,
+      this.profile_background,
+      this.distance,
+      this.longMainoffice,
+      this.latmainoffice,
+      this.image,
+      this.departement_name});
 
   var address,
       latitude,
@@ -158,6 +158,13 @@ class _MapsDetailState extends State<MapsDetail> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+          backgroundColor: baseColor,
+        ),
         body: Stack(
           children: <Widget>[
             _map(),
@@ -327,7 +334,7 @@ class _MapsDetailState extends State<MapsDetail> {
                 children: <Widget>[
                   Container(
                     margin:
-                    EdgeInsets.only(left: 10, right: 20, top: 5, bottom: 5),
+                        EdgeInsets.only(left: 10, right: 20, top: 5, bottom: 5),
                     // child: Icon(
                     //   Icons.info,
                     //   color: Colors.black45,
@@ -336,13 +343,13 @@ class _MapsDetailState extends State<MapsDetail> {
                   Container(
                       child: widget.distance > 20
                           ? Text(
-                        "Anda berada di luar area kantor",
-                        style: subtitleMainMenu,
-                      )
+                              "Anda berada di luar area kantor",
+                              style: subtitleMainMenu,
+                            )
                           : Text(
-                        "Anda berada di dalam area kantor",
-                        style: subtitleMainMenu,
-                      ))
+                              "Anda berada di dalam area kantor",
+                              style: subtitleMainMenu,
+                            ))
                 ],
               ),
             )
@@ -373,12 +380,9 @@ class _MapsDetailState extends State<MapsDetail> {
     });
   }
 
-
-
   void _onMapCreated(MapboxMapController controller) async {
     mapController = controller;
     _onStyleLoaded();
-
   }
 
   Future<void> addImageFromAsset(String name, String assetName) async {
@@ -399,7 +403,7 @@ class _MapsDetailState extends State<MapsDetail> {
 
     return MapboxMap(
       accessToken:
-      "pk.eyJ1Ijoia2l0dG9rYXR0byIsImEiOiJja2t5eTducm4wYmhwMnFwNXI4ejA4cGhuIn0.xoSKS41bJtuetZ8v5p_aiQ",
+          "pk.eyJ1Ijoia2l0dG9rYXR0byIsImEiOiJja2t5eTducm4wYmhwMnFwNXI4ejA4cGhuIn0.xoSKS41bJtuetZ8v5p_aiQ",
       onMapCreated: _onMapCreated,
       onStyleLoadedCallback: () {
         addCircle(mapController!);
