@@ -17,7 +17,7 @@ import 'package:toast/toast.dart';
 // String image_ur = "https://arenzha.s3.ap-southeast-1.amazonaws.com";
 String base_url = "https://hrd.arzaya.net";
 // String base_url = "http://192.168.100.23:8000"; //arzaya
-// String base_url = "http://192.168.0.102:8000"; //arenzha
+// String base_url = "http://192.168.0.109:8000"; //arenzha
 // String base_url = "http://192.168.248.142:8000"; //tethering
 String image_ur = "https://arzaya-hrd.s3.ap-southeast-1.amazonaws.com";
 String baset_url_event = "https://react.magentamediatama.net";

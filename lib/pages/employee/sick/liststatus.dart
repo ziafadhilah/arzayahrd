@@ -102,7 +102,7 @@ class _ListstatusSickPageEmployeeState
     if (status == "pending") {
       if (sick_dates.length > 3) {
         _visible = true;
-        print("truel");
+        print("true");
       } else {
         _visible = false;
         print("false");
@@ -175,29 +175,33 @@ class _ListstatusSickPageEmployeeState
               ),
               description != null
                   ? Container(
-                child: Text(
-                  "Keterangan",
-                  style: TextStyle(color: Colors.black,fontSize: 15,fontFamily: "Roboto-regular",letterSpacing: 0.5),
-                ),
-              )
+                      child: Text(
+                        "Keterangan",
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 15,
+                            fontFamily: "Roboto-regular",
+                            letterSpacing: 0.5),
+                      ),
+                    )
                   : Container(),
               SizedBox(
                 height: 5,
               ),
               description != null
                   ? Flex(direction: Axis.horizontal, children: [
-                Expanded(
-                    child: Container(
-                      child: Text(
-                        "${_sick['data'][index]['description'].toString()}",
-                        style: TextStyle(
-                            color: blackColor3, fontFamily: "Roboto-regular",letterSpacing: 0.5),
-                      ),
-                    ))
-              ])
+                      Expanded(
+                          child: Container(
+                        child: Text(
+                          "${_sick['data'][index]['description'].toString()}",
+                          style: TextStyle(
+                              color: blackColor3,
+                              fontFamily: "Roboto-regular",
+                              letterSpacing: 0.5),
+                        ),
+                      ))
+                    ])
                   : Container(),
-
-
               SizedBox(
                 height: 20,
               ),
@@ -424,8 +428,7 @@ class _ListstatusSickPageEmployeeState
   }
 
   void editSick(var id, date_of_filing, sick_dates, description) async {
-    var result =
-   await  Navigator.push(
+    var result = await Navigator.push(
         context,
         PageTransition(
             type: PageTransitionType.rightToLeft,

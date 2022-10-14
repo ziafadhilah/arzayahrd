@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:arzayahrd/pages/employee/notification/notification.dart';
 import 'package:arzayahrd/pages/employee/official_travel/official_travel.dart';
 import 'package:double_back_to_close_app/double_back_to_close_app.dart';
 import 'package:flutter/foundation.dart';
@@ -42,6 +43,7 @@ class _HomeEmployeeState extends State<HomeEmployee> {
   final List<Notif> ListNotif = [];
   Map? _projects;
   bool _loading = true;
+  var notifiactionTotal = "0";
   var user_id, address, name;
   var employeeId, photo;
   var officialTravelLength = 0;
@@ -719,34 +721,64 @@ class _HomeEmployeeState extends State<HomeEmployee> {
                                             ),
                                           ),
                                           Expanded(
-                                              child: Container(
-                                            alignment: Alignment.topRight,
-                                            width: double.maxFinite,
-                                            margin: EdgeInsets.only(
-                                                left: 20, top: 25),
-                                            child: Stack(
-                                              children: [
-                                                Container(
-                                                  child: Icon(
-                                                    Icons
-                                                        .notifications_outlined,
-                                                    color: Colors.white,
-                                                    size: 20,
+                                            child: Container(
+                                              alignment: Alignment.topRight,
+                                              width: double.maxFinite,
+                                              margin: EdgeInsets.only(
+                                                  left: 20, top: 25),
+                                              child: Stack(
+                                                children: [
+                                                  InkWell(
+                                                    onTap: () {
+                                                      Navigator.push(
+                                                        context,
+                                                        PageTransition(
+                                                          type:
+                                                              PageTransitionType
+                                                                  .rightToLeft,
+                                                          child:
+                                                              NotificationPage(),
+                                                        ),
+                                                      );
+                                                    },
+                                                    child: Container(
+                                                      child: Icon(
+                                                        Icons
+                                                            .notifications_outlined,
+                                                        color: Colors.white,
+                                                        size: 20,
+                                                      ),
+                                                    ),
                                                   ),
-                                                ),
-                                                Container(
-                                                  width: 10,
-                                                  height: 10,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10),
-                                                    color: redBaseColor,
-                                                  ),
-                                                ),
-                                              ],
+                                                  notifiactionTotal != 0
+                                                      ? Container(
+                                                          width: 15,
+                                                          height: 15,
+                                                          alignment:
+                                                              Alignment.center,
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        10),
+                                                            color: redBaseColor,
+                                                          ),
+                                                          child: Text(
+                                                            "${notifiactionTotal}",
+                                                            style: TextStyle(
+                                                                fontSize: 10,
+                                                                color: Colors
+                                                                    .white),
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          ),
+                                                        )
+                                                      : Container(),
+                                                ],
+                                              ),
                                             ),
-                                          ))
+                                          )
                                         ],
                                       ),
                                     ),
