@@ -1,22 +1,24 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:format_indonesia/format_indonesia.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:arzayahrd/services/api_clien.dart';
-import 'package:arzayahrd/services/attendances.dart';
 import 'package:arzayahrd/utalities/color.dart';
+import 'package:format_indonesia/format_indonesia.dart';
+import 'package:intl/intl.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'package:arzayahrd/services/attendances.dart';
+import 'package:arzayahrd/services/api_clien.dart';
+
 import 'package:http/http.dart' as http;
 
-class ListPending extends StatefulWidget {
+class ListRejected extends StatefulWidget {
   @override
-  State<ListPending> createState() => _ListPendingState();
+  State<ListRejected> createState() => _ListRejectedState();
 }
 
-class _ListPendingState extends State<ListPending> {
+class _ListRejectedState extends State<ListRejected> {
   var employeeId;
   var isLoading = true;
   List? attendances;
@@ -32,7 +34,7 @@ class _ListPendingState extends State<ListPending> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         body: isLoading == true
             ? Container(
@@ -50,29 +52,30 @@ class _ListPendingState extends State<ListPending> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              // Container(
-                              //   child: Text(
-                              //     "${Waktu(DateTime.parse("${attendances?[index]['date']}")).yMMMMEEEEd()}",
-                              //     style: TextStyle(
-                              //         color: Colors.black,
-                              //         fontSize: 14,
-                              //         fontFamily: "Roboto-regular",
-                              //         fontWeight: FontWeight.w600,
-                              //         letterSpacing: 0.5),
-                              //   ),
-                              // ),
+                              Container(
+                                child: Text(
+                                  "${Waktu(DateTime.parse("${attendances?[index]['date']}")).yMMMMEEEEd()}",
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 14,
+                                      fontFamily: "Roboto-regular",
+                                      fontWeight: FontWeight.w600,
+                                      letterSpacing: 0.5),
+                                ),
+                              ),
                               Column(
                                 children: List.generate(
                                     attendances?[index]['data'].length,
                                     (index1) {
                                   var data =
                                       attendances?[index]['data'][index1];
+
                                   return Container(
                                     margin: EdgeInsets.only(left: 10),
                                     child: Card(
                                       child: Container(
                                         width: Get.mediaQuery.size.width,
-                                        height: Get.mediaQuery.size.height / 5,
+                                        height: Get.mediaQuery.size.height / 6,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -82,14 +85,14 @@ class _ListPendingState extends State<ListPending> {
                                                 Container(
                                                   margin: EdgeInsets.all(10),
                                                   child: Text(
-                                                    "${Waktu(DateTime.parse(data['date'])).yMMMMEEEEd()}",
+                                                    "${DateFormat("HH:mm:ss").format(DateTime.parse(data['clock_out'].toString()))}",
                                                     style: TextStyle(
-                                                        color: Colors.black,
+                                                        color: Colors.red,
                                                         fontSize: 12,
                                                         fontFamily:
                                                             "Roboto-regular",
                                                         fontWeight:
-                                                            FontWeight.w600,
+                                                            FontWeight.w300,
                                                         letterSpacing: 0.5),
                                                     textAlign: TextAlign.left,
                                                   ),
@@ -230,21 +233,7 @@ class _ListPendingState extends State<ListPending> {
                                                           letterSpacing: 0.5),
                                                     ),
                                                   )
-                                                : Container(),
-                                            Container(
-                                              margin: EdgeInsets.only(
-                                                  left: 10, top: 5),
-                                              child: Text(
-                                                "Waktu Checkout: ${DateFormat("HH:mm:ss").format(DateTime.parse(data['clock_out'].toString()))}",
-                                                style: TextStyle(
-                                                    color: Colors.red,
-                                                    fontSize: 11,
-                                                    fontFamily:
-                                                        "Roboto-regular",
-                                                    fontWeight: FontWeight.w300,
-                                                    letterSpacing: 0.5),
-                                              ),
-                                            ),
+                                                : Container()
                                           ],
                                         ),
                                       ),
@@ -277,7 +266,7 @@ class _ListPendingState extends State<ListPending> {
         isLoading = true;
       });
       http.Response response = await http.get(Uri.parse(
-          "$base_url/api/notification/${employeeId}?overtime_approval_status="));
+          "$base_url/api/notification/${employeeId}?overtime_approval_status=rejected"));
 
       attendances = jsonDecode(response.body);
       //print("data ${jsonDecode(response.body[0])}");
@@ -344,54 +333,5 @@ class _ListPendingState extends State<ListPending> {
             ),
           )
         ]).show();
-    // if (alert=="update"){
-    //   //_getDataPref();
-    //
-    // }
-
-    // Alert(
-    //
-    //   context: context,
-    //   type: AlertType.warning,
-    //   title: "Approval",
-    //   // desc: "Apaka kamu yakin melakukan check out pada pukul ${time} ",
-    //   desc: "Berikut ini data lembur ${name} ",
-    //   buttons: [
-    //     DialogButton(
-    //       child: Text(
-    //         "Iya",
-    //         style: TextStyle(color: Colors.white, fontSize: 20),
-    //       ),
-    //       onPressed: () {
-    //         // Navigator.pop(context);
-    //         // var date=DateFormat('yyyy-MM-dd').format(DateTime.now());
-    //         // var time=DateFormat('HH:mm:ss').format(DateTime.now());
-    //         // validator.validation_checkout(
-    //         //     context,
-    //         //     photos,
-    //         //     remark,
-    //         //     lat,
-    //         //     long,
-    //         //     employee_id,
-    //         //     date,
-    //         //     time,
-    //         //     departement_name,
-    //         //     distance,
-    //         //     office_latitude,
-    //         //     office_longitude,
-    //         //     category,isLembur);
-    //       },
-    //       color: btnColor1,
-    //     ),
-    //     DialogButton(
-    //       child: Text(
-    //         "Batalkan",
-    //         style: TextStyle(color: Colors.white, fontSize: 20),
-    //       ),
-    //       onPressed: () => Navigator.pop(context),
-    //       color: Colors.black38,
-    //     )
-    //   ],
-    // ).show();
   }
 }

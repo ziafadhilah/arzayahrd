@@ -44,6 +44,8 @@ class _HomeEmployeeState extends State<HomeEmployee> {
   Map? _projects;
   bool _loading = true;
   var notifiactionTotal = "0";
+  var notifTotal;
+  List? attendances;
   var user_id, address, name;
   var employeeId, photo;
   var officialTravelLength = 0;
@@ -746,7 +748,7 @@ class _HomeEmployeeState extends State<HomeEmployee> {
                                                         Icons
                                                             .notifications_outlined,
                                                         color: Colors.white,
-                                                        size: 20,
+                                                        size: 30,
                                                       ),
                                                     ),
                                                   ),
@@ -765,7 +767,7 @@ class _HomeEmployeeState extends State<HomeEmployee> {
                                                             color: redBaseColor,
                                                           ),
                                                           child: Text(
-                                                            "${notifiactionTotal}",
+                                                            "${notifTotal}",
                                                             style: TextStyle(
                                                                 fontSize: 10,
                                                                 color: Colors
@@ -841,6 +843,7 @@ class _HomeEmployeeState extends State<HomeEmployee> {
       user_id = sharedPreferences.getString("user_id");
       name = sharedPreferences.getString("first_name");
       _employee(user_id);
+      fetchAttendancesPending(user_id.toString());
     });
     setState(() {
       dataProject(user_id);
@@ -872,6 +875,26 @@ class _HomeEmployeeState extends State<HomeEmployee> {
       setState(() {
         dataProject(user_id);
       });
+    }
+  }
+
+  Future fetchAttendancesPending(var id) async {
+    try {
+      setState(() {
+        _loading = true;
+      });
+      http.Response response = await http.get(Uri.parse(
+          "$base_url/api/notification/${user_id}?overtime_approval_status="));
+
+      attendances = jsonDecode(response.body);
+      notifTotal = attendances?.length;
+      //print("data ${jsonDecode(response.body[0])}");
+
+      setState(() {
+        _loading = false;
+      });
+    } catch (e) {
+      print("${e}");
     }
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:arzayahrd/pages/employee/notification/listpending.dart';
+import 'package:arzayahrd/pages/employee/notification/listreject.dart';
 import 'package:flutter/material.dart';
 import 'package:format_indonesia/format_indonesia.dart';
 import 'package:get/get.dart';
@@ -33,7 +34,7 @@ class _NotificationPageState extends State<NotificationPage> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 2,
+      length: 3,
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -53,8 +54,9 @@ class _NotificationPageState extends State<NotificationPage> {
                 letterSpacing: 0.5),
           ),
           bottom: TabBar(tabs: [
-            Tab(text: "APPROVED"),
             Tab(text: "PENDING"),
+            Tab(text: "APPROVED"),
+            Tab(text: "REJECTED"),
           ]),
         ),
         body: isLoading == true
@@ -65,6 +67,7 @@ class _NotificationPageState extends State<NotificationPage> {
               )
             : TabBarView(
                 children: [
+                  ListPending(),
                   SingleChildScrollView(
                     child: Container(
                       margin: EdgeInsets.all(20),
@@ -287,7 +290,7 @@ class _NotificationPageState extends State<NotificationPage> {
                           })),
                     ),
                   ),
-                  ListPending(),
+                  ListRejected(),
                 ],
               ),
       ),

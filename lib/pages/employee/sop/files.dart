@@ -8,6 +8,7 @@ import 'package:arzayahrd/services/api_clien.dart';
 import 'package:http/http.dart' as http;
 import 'package:page_transition/page_transition.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/link.dart';
 
 class Files extends StatefulWidget {
   const Files({Key? key}) : super(key: key);
@@ -46,66 +47,77 @@ class _FilesState extends State<Files> {
               child: Container(
                 margin: EdgeInsets.all(10),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: List.generate(files!.length, (index) {
-                        return _files(index);
+                        return Container(
+                          width: Get.mediaQuery.size.width,
+                          height: 100,
+                          child: Card(
+                            elevation: 1,
+                            child: _files(index),
+                          ),
+                        );
                       }),
                     ),
-                    sop != null
-                        ? InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                PageTransition(
-                                  type: PageTransitionType.rightToLeft,
-                                  child: DetailAttachmentPage(attachment: sop),
-                                ),
-                              );
-                            },
-                            child: Card(
-                              child: Container(
-                                width: Get.mediaQuery.size.width,
-                                height: 100,
-                                child: Container(
-                                  margin: EdgeInsets.all(20),
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Container(
-                                        child: Text(
-                                          "SOP",
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 12,
-                                              fontFamily: "Roboto-regular",
-                                              fontWeight: FontWeight.w600,
-                                              letterSpacing: 0.5),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      Container(
-                                        child: Text(
-                                          "Menampilkan SOP perusahaan berdasarkan Divisi masing pegawai,tiap divisi mempunya SOP yang berbeda",
-                                          style: TextStyle(
-                                              color:
-                                                  Colors.black.withOpacity(0.5),
-                                              fontSize: 10,
-                                              fontFamily: "Roboto-regular",
-                                              fontWeight: FontWeight.w300,
-                                              letterSpacing: 0.5),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          )
-                        : Container()
+                    // sop != null
+                    //     ? InkWell(
+                    //         onTap: () {
+                    //           Navigator.push(
+                    //             context,
+                    //             PageTransition(
+                    //               type: PageTransitionType.rightToLeft,
+                    //               child: DetailAttachmentPage(attachment: sop),
+                    //             ),
+                    //           );
+                    //         },
+                    //         child: Card(
+                    //           child: Container(
+                    //             width: Get.mediaQuery.size.width,
+                    //             height: 100,
+                    //             child: Container(
+                    //               margin: EdgeInsets.all(20),
+                    //               child: Column(
+                    //                 crossAxisAlignment:
+                    //                     CrossAxisAlignment.start,
+                    //                 children: <Widget>[
+                    //                   Container(
+                    //                     child: Text(
+                    //                       "SOP",
+                    //                       style: TextStyle(
+                    //                           color: Colors.black,
+                    //                           fontSize: 12,
+                    //                           fontFamily: "Roboto-regular",
+                    //                           fontWeight: FontWeight.w600,
+                    //                           letterSpacing: 0.5),
+                    //                     ),
+                    //                   ),
+                    //                   SizedBox(
+                    //                     height: 10,
+                    //                   ),
+                    //                   Container(
+                    //                     child: Text(
+                    //                       "Menampilkan SOP perusahaan berdasarkan Divisi masing pegawai,tiap divisi mempunya SOP yang berbeda",
+                    //                       style: TextStyle(
+                    //                           color:
+                    //                               Colors.black.withOpacity(0.5),
+                    //                           fontSize: 10,
+                    //                           fontFamily: "Roboto-regular",
+                    //                           fontWeight: FontWeight.w300,
+                    //                           letterSpacing: 0.5),
+                    //                     ),
+                    //                   )
+                    //                 ],
+                    //               ),
+                    //             ),
+                    //           ),
+                    //         ),
+                    //       )
+                    //     : Container()
                   ],
                 ),
               ),
@@ -165,58 +177,101 @@ class _FilesState extends State<Files> {
   }
 
   Widget _files(index) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          PageTransition(
-            type: PageTransitionType.rightToLeft,
-            child: DetailAttachmentPage(
-              attachment: files?[index]['attachment'],
-              title: "Tatatertib",
-            ),
+    return Link(
+      uri: Uri.parse("$image_ur/${files?[index]['attachment']}"),
+      target: LinkTarget.blank,
+      builder: (BuildContext context, FollowLink? followLink) {
+        return RaisedButton(
+          color: mFormWhite,
+          onPressed: followLink,
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 12.0),
+                child: Text(
+                  "${files?[index]['title']}",
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 12,
+                      fontFamily: "Roboto-regular",
+                      fontWeight: FontWeight.w600,
+                      letterSpacing: 0.5),
+                ),
+              ),
+              SizedBox(
+                height: 8,
+              ),
+              Text(
+                "${files?[index]['description']}",
+                style: TextStyle(
+                    color: Colors.black.withOpacity(0.5),
+                    fontSize: 10,
+                    fontFamily: "Roboto-regular",
+                    fontWeight: FontWeight.w300,
+                    letterSpacing: 0.5),
+              ),
+            ],
           ),
         );
+        // return TextButton.icon(
+        //   onPressed: followLink,
+        //   label: Text("${files?[index]['title']}"),
+        //   icon: const Icon(Icons.read_more),
+        // );
       },
-      child: Card(
-        child: Container(
-          width: Get.mediaQuery.size.width,
-          height: 100,
-          child: Container(
-            margin: EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  child: Text(
-                    "${files?[index]['title']}",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
-                        fontFamily: "Roboto-regular",
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 0.5),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  child: Text(
-                    "${files?[index]['description']}",
-                    style: TextStyle(
-                        color: Colors.black.withOpacity(0.5),
-                        fontSize: 10,
-                        fontFamily: "Roboto-regular",
-                        fontWeight: FontWeight.w300,
-                        letterSpacing: 0.5),
-                  ),
-                )
-              ],
-            ),
-          ),
-        ),
-      ),
     );
+    // return InkWell(
+    //   onTap: () {
+    //     Navigator.push(
+    //       context,
+    //       PageTransition(
+    //         type: PageTransitionType.rightToLeft,
+    //         child: DetailAttachmentPage(
+    //           attachment: files?[index]['attachment'],
+    //           title: files?[index]['title'],
+    //         ),
+    //       ),
+    //     );
+    //   },
+    //   child: Card(
+    //     child: Container(
+    //       width: Get.mediaQuery.size.width,
+    //       height: 100,
+    //       child: Container(
+    //         margin: EdgeInsets.all(20),
+    //         child: Column(
+    //           crossAxisAlignment: CrossAxisAlignment.start,
+    //           children: <Widget>[
+    //             Container(
+    //               child: Text(
+    //                 "${files?[index]['title']}",
+    //                 style: TextStyle(
+    //                     color: Colors.black,
+    //                     fontSize: 12,
+    //                     fontFamily: "Roboto-regular",
+    //                     fontWeight: FontWeight.w600,
+    //                     letterSpacing: 0.5),
+    //               ),
+    //             ),
+    //             SizedBox(
+    //               height: 10,
+    //             ),
+    //             Container(
+    //               child: Text(
+    //                 "${files?[index]['description']}",
+    //                 style: TextStyle(
+    //                     color: Colors.black.withOpacity(0.5),
+    //                     fontSize: 10,
+    //                     fontFamily: "Roboto-regular",
+    //                     fontWeight: FontWeight.w300,
+    //                     letterSpacing: 0.5),
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //     ),
+    //   ),
+    // );
   }
 }
