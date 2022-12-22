@@ -72,7 +72,8 @@ class _ListPendingState extends State<ListPending> {
                                     child: Card(
                                       child: Container(
                                         width: Get.mediaQuery.size.width,
-                                        height: Get.mediaQuery.size.height / 5,
+                                        height:
+                                            Get.mediaQuery.size.height / 4.5,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -82,6 +83,7 @@ class _ListPendingState extends State<ListPending> {
                                                 Container(
                                                   margin: EdgeInsets.all(10),
                                                   child: Text(
+                                                    // data['date'],
                                                     "${Waktu(DateTime.parse(data['date'])).yMMMMEEEEd()}",
                                                     style: TextStyle(
                                                         color: Colors.black,
@@ -212,38 +214,53 @@ class _ListPendingState extends State<ListPending> {
                                                     letterSpacing: 0.5),
                                               ),
                                             ),
-                                            data['overtime_approval_status'] !=
-                                                    null
-                                                ? Container(
-                                                    margin: EdgeInsets.only(
-                                                        left: 10, top: 5),
-                                                    child: Text(
-                                                      "${data['overtime_approval_status'] == "approved" ? "Disetujui Oleh" : "Ditolak Oleh "} ${data['approval_by'] != null ? data['approval_by']['first_name'] : "-"} ",
-                                                      style: TextStyle(
-                                                          color: Colors.black
-                                                              .withOpacity(0.7),
-                                                          fontSize: 11,
-                                                          fontFamily:
-                                                              "Roboto-regular",
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          letterSpacing: 0.5),
-                                                    ),
-                                                  )
-                                                : Container(),
-                                            Container(
-                                              margin: EdgeInsets.only(
-                                                  left: 10, top: 5),
-                                              child: Text(
-                                                "Waktu Checkout: ${DateFormat("HH:mm:ss").format(DateTime.parse(data['clock_out'].toString()))}",
-                                                style: TextStyle(
-                                                    color: Colors.red,
-                                                    fontSize: 11,
-                                                    fontFamily:
-                                                        "Roboto-regular",
-                                                    fontWeight: FontWeight.w300,
-                                                    letterSpacing: 0.5),
+                                            Expanded(
+                                              child:
+                                                  data['overtime_approval_status'] !=
+                                                          null
+                                                      ? Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  left: 10,
+                                                                  top: 5),
+                                                          child: Text(
+                                                            "${data['overtime_approval_status'] == "approved" ? "Disetujui Oleh" : "Ditolak Oleh "} ${data['approval_by'] != null ? data['approval_by']['first_name'] : "-"} ",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black
+                                                                    .withOpacity(
+                                                                        0.7),
+                                                                fontSize: 11,
+                                                                fontFamily:
+                                                                    "Roboto-regular",
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w300,
+                                                                letterSpacing:
+                                                                    0.5),
+                                                          ),
+                                                        )
+                                                      : Container(),
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                margin: EdgeInsets.only(
+                                                    left: 10, top: 5),
+                                                child: Text(
+                                                  "Waktu Checkout: ${DateFormat("HH:mm:ss").format(DateTime.parse(data['clock_out'].toString()))}",
+                                                  style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontSize: 11,
+                                                      fontFamily:
+                                                          "Roboto-regular",
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                      letterSpacing: 0.5),
+                                                ),
                                               ),
+                                            ),
+                                            SizedBox(
+                                              height: 5,
                                             ),
                                           ],
                                         ),

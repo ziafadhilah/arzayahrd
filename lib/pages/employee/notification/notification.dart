@@ -89,6 +89,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                   //         letterSpacing: 0.5),
                                   //   ),
                                   // ),
+
                                   Column(
                                     children: List.generate(
                                         attendances?[index]['data'].length,
@@ -112,6 +113,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                                       margin:
                                                           EdgeInsets.all(10),
                                                       child: Text(
+                                                        // data['date'],
                                                         "${Waktu(DateTime.parse(data['date'])).yMMMMEEEEd()}",
                                                         style: TextStyle(
                                                             color: Colors.black,
@@ -239,43 +241,37 @@ class _NotificationPageState extends State<NotificationPage> {
                                                         letterSpacing: 0.5),
                                                   ),
                                                 ),
-                                                data['overtime_approval_status'] !=
-                                                        null
-                                                    ? Container(
-                                                        margin: EdgeInsets.only(
-                                                            left: 10, top: 5),
-                                                        child: Text(
-                                                          "${data['overtime_approval_status'] == "approved" ? "Disetujui Oleh" : "Ditolak Oleh "} ${data['approval_by'] != null ? data['approval_by']['first_name'] : "-"} ",
-                                                          style: TextStyle(
-                                                              color: Colors
-                                                                  .black
-                                                                  .withOpacity(
-                                                                      0.7),
-                                                              fontSize: 11,
-                                                              fontFamily:
-                                                                  "Roboto-regular",
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w300,
-                                                              letterSpacing:
-                                                                  0.5),
-                                                        ),
-                                                      )
-                                                    : Container(),
-                                                Container(
-                                                  margin: EdgeInsets.only(
-                                                      left: 10, top: 5),
-                                                  child: Text(
-                                                    "Waktu Checkout: ${DateFormat("HH:mm:ss").format(DateTime.parse(data['clock_out'].toString()))}",
-                                                    style: TextStyle(
-                                                        color: Colors.red,
-                                                        fontSize: 11,
-                                                        fontFamily:
-                                                            "Roboto-regular",
-                                                        fontWeight:
-                                                            FontWeight.w300,
-                                                        letterSpacing: 0.5),
-                                                  ),
+                                                Expanded(
+                                                  child:
+                                                      data['overtime_approval_status'] !=
+                                                              null
+                                                          ? Container(
+                                                              margin: EdgeInsets
+                                                                  .only(
+                                                                      left: 10,
+                                                                      top: 5),
+                                                              child: Text(
+                                                                "${data['overtime_approval_status'] == "approved" ? "Disetujui Oleh" : "Ditolak Oleh "} ${data['approval_by'] != null ? data['approval_by']['first_name'] : "-"} ",
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .black
+                                                                        .withOpacity(
+                                                                            0.7),
+                                                                    fontSize:
+                                                                        11,
+                                                                    fontFamily:
+                                                                        "Roboto-regular",
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w300,
+                                                                    letterSpacing:
+                                                                        0.5),
+                                                              ),
+                                                            )
+                                                          : Container(),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
                                                 ),
                                               ],
                                             ),

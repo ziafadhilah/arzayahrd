@@ -52,17 +52,17 @@ class _ListRejectedState extends State<ListRejected> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
-                              Container(
-                                child: Text(
-                                  "${Waktu(DateTime.parse("${attendances?[index]['date']}")).yMMMMEEEEd()}",
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 14,
-                                      fontFamily: "Roboto-regular",
-                                      fontWeight: FontWeight.w600,
-                                      letterSpacing: 0.5),
-                                ),
-                              ),
+                              // Container(
+                              //   child: Text(
+                              //     "${Waktu(DateTime.parse("${attendances?[index]['date']}")).yMMMMEEEEd()}",
+                              //     style: TextStyle(
+                              //         color: Colors.black,
+                              //         fontSize: 14,
+                              //         fontFamily: "Roboto-regular",
+                              //         fontWeight: FontWeight.w600,
+                              //         letterSpacing: 0.5),
+                              //   ),
+                              // ),
                               Column(
                                 children: List.generate(
                                     attendances?[index]['data'].length,
@@ -75,7 +75,8 @@ class _ListRejectedState extends State<ListRejected> {
                                     child: Card(
                                       child: Container(
                                         width: Get.mediaQuery.size.width,
-                                        height: Get.mediaQuery.size.height / 6,
+                                        height:
+                                            Get.mediaQuery.size.height / 4.5,
                                         child: Column(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
@@ -85,7 +86,8 @@ class _ListRejectedState extends State<ListRejected> {
                                                 Container(
                                                   margin: EdgeInsets.all(10),
                                                   child: Text(
-                                                    "${DateFormat("HH:mm:ss").format(DateTime.parse(data['clock_out'].toString()))}",
+                                                    // data['date'],
+                                                    "${Waktu(DateTime.parse(data['date'])).yMMMMEEEEd()}",
                                                     style: TextStyle(
                                                         color: Colors.red,
                                                         fontSize: 12,
@@ -215,25 +217,51 @@ class _ListRejectedState extends State<ListRejected> {
                                                     letterSpacing: 0.5),
                                               ),
                                             ),
-                                            data['overtime_approval_status'] !=
-                                                    null
-                                                ? Container(
-                                                    margin: EdgeInsets.only(
-                                                        left: 10, top: 5),
-                                                    child: Text(
-                                                      "${data['overtime_approval_status'] == "approved" ? "Disetujui Oleh" : "Ditolak Oleh "} ${data['approval_by'] != null ? data['approval_by']['first_name'] : "-"} ",
-                                                      style: TextStyle(
-                                                          color: Colors.black
-                                                              .withOpacity(0.7),
-                                                          fontSize: 11,
-                                                          fontFamily:
-                                                              "Roboto-regular",
-                                                          fontWeight:
-                                                              FontWeight.w300,
-                                                          letterSpacing: 0.5),
-                                                    ),
-                                                  )
-                                                : Container()
+                                            Expanded(
+                                              child:
+                                                  data['overtime_approval_status'] !=
+                                                          null
+                                                      ? Container(
+                                                          margin:
+                                                              EdgeInsets.only(
+                                                                  left: 10,
+                                                                  top: 5),
+                                                          child: Text(
+                                                            "${data['overtime_approval_status'] == "approved" ? "Disetujui Oleh" : "Ditolak Oleh "} ${data['approval_by'] != null ? data['approval_by']['first_name'] : "-"} ",
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .black
+                                                                    .withOpacity(
+                                                                        0.7),
+                                                                fontSize: 11,
+                                                                fontFamily:
+                                                                    "Roboto-regular",
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w300,
+                                                                letterSpacing:
+                                                                    0.5),
+                                                          ),
+                                                        )
+                                                      : Container(),
+                                            ),
+                                            Expanded(
+                                              child: Container(
+                                                margin: EdgeInsets.only(
+                                                    left: 10, top: 5),
+                                                child: Text(
+                                                  "Waktu Checkout: ${DateFormat("HH:mm:ss").format(DateTime.parse(data['clock_out'].toString()))}",
+                                                  style: TextStyle(
+                                                      color: Colors.red,
+                                                      fontSize: 11,
+                                                      fontFamily:
+                                                          "Roboto-regular",
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                      letterSpacing: 0.5),
+                                                ),
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ),
