@@ -49,6 +49,7 @@ class _HomeEmployeeState extends State<HomeEmployee> {
   var user_id, address, name;
   var employeeId, photo;
   var officialTravelLength = 0;
+  var employeeType = "";
 
   //-----main menu-----
   Widget _buildMenucheckin() {
@@ -712,14 +713,37 @@ class _HomeEmployeeState extends State<HomeEmployee> {
                                           Container(
                                             margin: EdgeInsets.only(
                                                 left: 20, top: 25),
-                                            child: Text(
-                                              "Hi, ${name ?? ""}",
-                                              style: TextStyle(
-                                                  color: Colors.white,
-                                                  fontSize: 15,
-                                                  letterSpacing: 0.5,
-                                                  fontFamily: "roboto-regular",
-                                                  fontWeight: FontWeight.w400),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  "Hi, ${name ?? ""}",
+                                                  style: TextStyle(
+                                                      color: Colors.white,
+                                                      fontSize: 15,
+                                                      letterSpacing: 0.5,
+                                                      fontFamily:
+                                                          "roboto-regular",
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                ),
+                                                SizedBox(
+                                                  height: 5,
+                                                ),
+                                                Text(
+                                                  "${employeeType}",
+                                                  style: TextStyle(
+                                                      color: Colors.white
+                                                          .withOpacity(0.3),
+                                                      fontSize: 13,
+                                                      letterSpacing: 0.5,
+                                                      fontFamily:
+                                                          "Roboto-regular",
+                                                      fontWeight:
+                                                          FontWeight.w400),
+                                                ),
+                                              ],
                                             ),
                                           ),
                                           Expanded(
@@ -860,6 +884,9 @@ class _HomeEmployeeState extends State<HomeEmployee> {
         name = data['data']['first_name'];
         photo = data['data']['photo'];
         employeeId = data['data']['employee_id'];
+        employeeType = data['data']['active_career2'] != null
+            ? data['data']['active_career2']['position_setting']['name']
+            : null;
       });
     } else {}
   }

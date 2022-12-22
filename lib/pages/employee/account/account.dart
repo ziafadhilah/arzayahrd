@@ -31,6 +31,8 @@ class _AccountEmployeeState extends State<AccountEmployee> {
       email,
       gender,
       employee_id,
+      employee_type = "",
+      position = "",
       departement_name,
       profile_background = "";
   var user_id, value, photo;
@@ -186,11 +188,15 @@ class _AccountEmployeeState extends State<AccountEmployee> {
         //               email: email,
         //             )));
 
-        Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: change_password(
-          id: user_id,
-          username: username,
-          email: email,
-        )));
+        Navigator.push(
+            context,
+            PageTransition(
+                type: PageTransitionType.rightToLeft,
+                child: change_password(
+                  id: user_id,
+                  username: username,
+                  email: email,
+                )));
       },
       child: Container(
         margin: EdgeInsets.all(5),
@@ -280,7 +286,13 @@ class _AccountEmployeeState extends State<AccountEmployee> {
         // Get.to(DetailProfile(
         //   id: user_id,
         // ));
-        Navigator.push(context, PageTransition(type: PageTransitionType.rightToLeft, child: DetailProfile(id: user_id,)));
+        Navigator.push(
+            context,
+            PageTransition(
+                type: PageTransitionType.rightToLeft,
+                child: DetailProfile(
+                  id: user_id,
+                )));
       },
       child: Container(
         margin: EdgeInsets.all(5),
@@ -871,7 +883,7 @@ class _AccountEmployeeState extends State<AccountEmployee> {
   Widget _buildHeader() {
     return Container(
       width: Get.mediaQuery.size.width,
-      height: Get.mediaQuery.size.height * 0.3+10,
+      height: Get.mediaQuery.size.height * 0.3 + 10,
       color: baseColor,
       child: Column(
         children: <Widget>[
@@ -909,7 +921,7 @@ class _AccountEmployeeState extends State<AccountEmployee> {
           ),
           Container(
             child: Text(
-              "${employee_id ?? ""}",
+              "${employee_id ?? '-'} | ${position ?? '-'}",
               style: TextStyle(
                 color: Colors.white.withOpacity(0.5),
                 letterSpacing: 0.5,
@@ -1238,6 +1250,10 @@ class _AccountEmployeeState extends State<AccountEmployee> {
         last_name = data['data']['last_name'];
         photo = data['data']['photo'];
         employee_id = data['data']['employee_id'];
+        employee_type = data['data']['employee_type'] ?? "";
+        position = data['data']['active_career2'] != null
+            ? data['data']['active_career2']['position_setting']['name']
+            : null;
       });
     } else {}
   }
